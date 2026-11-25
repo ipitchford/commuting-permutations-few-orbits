@@ -37,7 +37,7 @@ jobs:
           cd "$RUNNER_TEMP/neg2"; python3 -I -B -O code/extensions.py --output results/extensions.json > out.txt 2>&1 & p4=$!
           wait $p1
           wait $p2
-          tail -1 "$RUNNER_TEMP/runO/verify.out" "$RUNNER_TEMP/runO/ext.out"
+          tail -n 1 "$RUNNER_TEMP/runO/verify.out" "$RUNNER_TEMP/runO/ext.out"
           if wait $p3; then echo "altered constant 2401/1800 not detected"; exit 1; fi
           grep -q 'FAIL: (2.9) k=3 prefactor' "$RUNNER_TEMP/neg1/out.txt"
           if wait $p4; then echo "tightened certificate threshold not detected"; exit 1; fi
