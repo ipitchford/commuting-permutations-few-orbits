@@ -1,0 +1,19 @@
+Release replay environment (25 November 2026, macOS arm64 host)
+Interpreter (printed inside the runs, not assumed):
+- `uv run --no-project --python 3.12 --with mpmath==1.3.0` resolved to CPython 3.12.11 on macOS-27.2.1-arm64; both
+  scripts ran under it with -O and again without -O. (The lead's earlier run of the same commands, also CPython 3.12.11,
+  gave the same output.)
+Packages: mpmath 1.3.0 (requirements.txt); everything else is the standard library. No compiler.
+Working directory: the package root. Flags: python3 -I -B -O (and -I -B without -O). PYTHONDONTWRITEBYTECODE=1.
+Run times on the release host (two scripts in parallel): verify.py about 110 s, extensions.py about 80 s.
+GitHub CI: ubuntu-latest, actions/setup-python 3.12, pip install -r requirements.txt. One job: manifest, both scripts
+under -O, two negative controls, comparison with results/, working tree unchanged.
+Comparison policy (declared before tagging; the same in CI, README.md and REPLAY_RECEIPT.md;
+.github/ci/compare_json.py):
+- the key elapsed_seconds (run time) is ignored;
+- integers, booleans, exact rationals, text, the enumeration and identity results, and the certificate verdicts are
+  identical;
+- decimal numbers produced by mpmath (40-digit diagnostics of verify.py suites 3 and 5, the limit table, the printed
+  interval endpoints and error bounds of the certificates) agree to 10 significant digits (relative 1e-10). The
+  certificates themselves are interval computations whose verdicts must be identical.
+On the release platform both runs were identical to the recorded outputs apart from elapsed_seconds.

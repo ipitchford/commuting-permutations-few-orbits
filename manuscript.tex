@@ -1,0 +1,755 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\Sing}{\mathcal S}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Dc}{*_{\mathrm D}}
+\newcommand{\Ac}{*_{\mathrm A}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:\nolinkurl{#1}}}
+
+\title{Commuting permutations with few joint orbits:\\ asymptotics, log-concavity and the density of failures in every rank}
+\author{Anonymous\\[3pt]{\small DOI \href{https://doi.org/10.5281/zenodo.24541319}{10.5281/zenodo.24541319}}}
+\date{Version 1.0}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Count the ordered $\ell$-tuples of pairwise commuting permutations of an $n$-element set according to the number $k$ of joint orbits; call the count $A(\ell,n,k)$. For $\ell=1$ these are the Stirling numbers of the first kind, whose log-concavity in $k$ is classical. Abdesselam conjectured that $k\mapsto A(\ell,n,k)$ is log-concave for every rank $\ell$ and every $n$. Starr (2026) disproved this at rank two by showing that it fails at $k=2$ for infinitely many $n$, while holding eventually at every fixed $k\ge3$; he asked what happens in higher rank. We answer this for every fixed rank $\ell\ge2$ and every fixed $k$. In the fixed-orbit regime the conjecture fails in every rank, but only at two orbits, and there on a set of $n$ of positive density; at every fixed $k\ge3$ it holds for all large $n$, and we give the exact limit inferior and limit superior of the log-concavity ratio as Euler products. The ratios have continuous limiting distributions, so the density of two-orbit failures exists; this was left open even at rank two. We also certify explicit failures in ranks three and four; the one in rank three is an integer with $54$ digits, and a heuristic search suggests that no rank-three failure is very much smaller. The proofs rest on an asymptotic formula for $A(\ell,n,k)$ with an explicit arithmetic factor and an explicit, uniform error term.
+\end{abstract}
+
+\noindent\textbf{Keywords:} commuting permutations; orbit counts; d'Arcais polynomials; additive convolution; divisor sums; singular series; log-concavity; Erd\H{o}s--Wintner theorem.
+
+\noindent\textbf{MSC 2020:} 05A16, 11N37, 11A25, 05A20, 11K65.
+
+\section{Introduction}
+
+This section explains the question, why it is natural, what was known, and what this paper adds; it ends with a roadmap.
+
+\subsection{The question}
+Take $\ell$ permutations $\sigma_1,\dots,\sigma_\ell$ of the set $[n]=\{1,\dots,n\}$ that commute with one another. The group they generate splits $[n]$ into \emph{joint orbits}: two points lie in the same orbit when some product of the $\sigma_i$ and their inverses carries one to the other. Let
+\[
+A(\ell,n,k)=\#\bigl\{(\sigma_1,\ldots,\sigma_\ell)\in\mathfrak S_n^{\ell}:\ \sigma_i\sigma_j=\sigma_j\sigma_i\ \text{for all } i,j,\ \text{with exactly $k$ joint orbits}\bigr\}.
+\]
+For one permutation ($\ell=1$) the joint orbits are the cycles, and $A(1,n,k)$ is the unsigned Stirling number of the first kind. These numbers form a log-concave sequence in $k$, because their generating polynomial $x(x+1)\cdots(x+n-1)$ has only real roots. For two commuting permutations ($\ell=2$) the counts are, after normalisation, the coefficients of the d'Arcais polynomials, which describe the powers of the Dedekind eta function and of the partition generating function. Commuting $\ell$-tuples are also the homomorphisms from $\mathbb Z^\ell$ to $\mathfrak S_n$, so $A(\ell,n,k)$ counts $n$-sheeted coverings of the $\ell$-dimensional torus with $k$ connected components, weighted by labellings \cite{BryanFulman,ABDV}.
+
+Heim and Neuhauser \cite{HeimNeuhauser} conjectured that the d'Arcais coefficients are log-concave in $k$, and Abdesselam \cite[Conjecture~1.1]{Abdesselam2025a} extended this to every rank: for all $\ell$ and $n$,
+\begin{equation}\label{eq:conj}
+A(\ell,n,k)^2\ \ge\ A(\ell,n,k-1)\,A(\ell,n,k+1)\qquad(2\le k\le n-1).
+\end{equation}
+Log-concavity matters because it is the simplest shape property of a distribution: it rules out several peaks, and it typically signals an underlying real-rootedness or a law of large numbers. Here it is the probabilistic statement that the number of joint orbits of a uniformly random commuting tuple has a log-concave law.
+
+\subsection{What was known}
+The conjecture has been confirmed in several regimes, each defined by how $k$ and $\ell$ behave as $n$ grows. Table~\ref{tab:prior} lists them. The regime of a \emph{fixed} number of orbits $k$ with $n\to\infty$ was settled at rank two by Starr \cite{Starr2026a}. He showed that $k!A(2,n,k)/n!$ is asymptotic to an explicit constant times $n^{k-1}\sigma_{-(2k-1)}(n)$, where $\sigma_s(n)=\sum_{d\mid n}d^s$. From this he deduced that \eqref{eq:conj} fails at $k=2$ for infinitely many $n$, arbitrarily badly, but holds at every fixed $k\ge3$ once $n$ is large. In his outlook he called the extension to $\ell=3,4,\dots$ at small $k$ ``the most important open problem'' \cite[Section~5]{Starr2026a}. Charlton, Heim and Stumpenhusen \cite{CHS2026} then found the first rank-two counterexample, $n=65\,214\,507\,758\,400$, and proved that the set of rank-two counterexamples has lower density at least $2.47\times10^{-16}$ and upper density at most $6.8\times10^{-4}$. Whether the density itself exists was left open: their bounds are stated for it ``if [it] exists''. Charlton, Heim, Neuhauser, Stumpenhusen and Tr\"oger \cite{CHNST2026} used the explicit bounds of \cite{CHS2026} to show that a positive proportion of reduced d'Arcais polynomials have a root in the right half-plane. The closely related Nekrasov--Okounkov polynomials are the shifts $P(x+1)$ of the d'Arcais polynomials $P(x)$; log-concavity results for their coefficients at small $k$ (see \cite[Remark~2.5]{Starr2026a}) concern a different coefficient sequence and do not conflict with the failures discussed here.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}p{0.27\textwidth}p{0.33\textwidth}p{0.32\textwidth}@{}}
+\toprule
+Source & Regime & Outcome\\
+\midrule
+Abdesselam \cite{Abdesselam2025a} & $n$ fixed, $\ell\to\infty$ & \eqref{eq:conj} holds in the limit\\
+Abdesselam et al.\ \cite{ABDV} & formula; every $\ell$, $k=n-1$ & starting identity; holds\\
+Tripathi \cite{Tripathi}; Stumpenhusen \cite{Stumpenhusen} & $k=n-\alpha$, $\alpha$ fixed & holds for large $n$\\
+Abdesselam \cite{Abdesselam2025b} & $k\sim s\,n^{(\ell-1)/\ell}$ (typical $k$) & holds for large $n$\\
+Starr \cite{Starr2026a,Starr2026b} & $\ell=2$: $k$ fixed; $k\to\infty$ with $k/n<1-\varepsilon$ & fails at $k=2$; holds at fixed $k\ge3$ and for $k\to\infty$, $k/n<1-\varepsilon$\\
+Charlton et al.\ \cite{CHS2026} & $\ell=2$, $k=2$ & first counterexample; density bounds\\
+This paper & every fixed $\ell\ge2$, fixed $k$ & fails at $k=2$ in every rank (density exists); holds at fixed $k\ge3$; exact $\liminf$\\
+\bottomrule
+\end{tabular}
+\caption{Regimes in which the log-concavity conjecture \eqref{eq:conj} has been studied.}\label{tab:prior}
+\end{table}
+
+\subsection{What is new}
+We treat every fixed rank $\ell\ge2$ and every fixed orbit count $k$.
+\begin{enumerate}
+\item \emph{Asymptotics with an explicit error} (Theorem~\ref{thm:asym}, Theorem~\ref{thm:explicit}). $A(\ell,n,k)$ equals an explicit gamma factor times $n!\,n^{k(\ell-1)-1}$ times an arithmetic factor $\Sing_{\ell,k}(n)$, with relative error $O((1+\log n)^k/n)$ uniformly in the prime factorisation of $n$. The factor $\Sing_{\ell,k}(n)$ is an Euler product whose local factors are finite sums of geometric series.
+\item \emph{The conjecture fails in every rank} (Theorem~\ref{thm:fail}). At $k=2$ the log-concavity ratio tends to zero along $n=m!$, and falls below any $\varepsilon>0$ on a set of positive density. For $\ell\ge3$ this is, to our knowledge, the first disproof of Abdesselam's conjecture. Proposition~\ref{prop:explicit} certifies explicit failures: one $n$ with $54$ digits in rank three and one with $845$ digits in rank four.
+\item \emph{It holds at every fixed $k\ge3$} (Theorems~\ref{thm:interior} and~\ref{thm:liminf}). The exact limit inferior and limit superior of the ratio are Euler products, which reduce to Starr's formula at rank two; for example, the limit inferior is about $2.52$ at $\ell=3$, $k=3$.
+\item \emph{Limiting laws and densities} (Theorem~\ref{thm:laws}). For every fixed $\ell$ and $k$ the log-concavity ratio has a continuous limiting distribution. In particular, the density of two-orbit failures exists in every rank and lies strictly between $0$ and $1$; at rank two this settles the existence question left open in \cite{CHS2026}.
+\item \emph{Uniformity in $k$} (Corollary~\ref{cor:window}). Strict log-concavity holds simultaneously for $3\le k\le c\log n/\log\log n$ when $c<1/\ell$.
+\end{enumerate}
+
+\subsection{Why two orbits are exceptional}
+The mechanism is simple enough to state now. A single orbit means the tuple acts transitively, and then $A(\ell,n,1)=(n-1)!\,B_\ell(n)$, where $B_\ell(n)$ is the number of subgroups of index $n$ in $\mathbb Z^\ell$. This number carries the factor $\sigma_{-1}(n)=\sigma(n)/n$, which is unbounded: it is large when $n$ has many small prime factors, as for $n=m!$. For two or more orbits, the counts average a divisor-type function over all ways of writing $n$ as a sum, and the averaging leaves only a \emph{bounded} arithmetic factor. The ratio at $k=2$ contains $A(\ell,n,1)$ in its denominator, so it is small exactly when $\sigma(n)/n$ is large. For $k\ge3$ only bounded factors appear, and a gamma-function factor larger than one wins. The density of failures at $k=2$ is therefore a cousin of the density of abundant numbers, and its existence follows from the same classical tool, the Erd\H{o}s--Wintner theorem.
+
+\subsection{Methods and relation to earlier work}
+The leading-order asymptotic follows the classical route for additive convolutions of divisor sums, going back to Ramanujan and Ingham and used by Halberstam (see the references in \cite{LOST,Starr2026a}), by Lemke Oliver, Shrestha and Thorne \cite{LOST}, and at rank two by Starr \cite{Starr2026a}, who observed that his rank-two formula is an immediate consequence of \cite{LOST}. The qualitative leading term for $\ell\ge3$ is therefore expected. Our contribution on the analytic side is the explicit and uniform error term (absolute constants in Lemmas~\ref{lem:ap} and~\ref{lem:simplex}), and the local-factor inequalities of Section~\ref{sec:interior}, which make the log-concavity conclusions possible. The same leading term can be written as a Ramanujan expansion (Section~\ref{sec:ramanujan}). In that language, the binary case $k=2$ has a predecessor in the additive-convolution theorem of Gadiyar, Murty and Padma \cite[Theorem~10]{GMP} for functions with absolutely convergent Ramanujan expansions; see also Misra, Saha and Sharma \cite{MSS}. The distributional result applies the Erd\H{o}s--Wintner theorem \cite{ErdosWintner,TenenbaumVerwee}, exactly as in the classical treatment of $\varphi(n)/n$ and $\sigma(n)/n$; no new probabilistic input is needed, and none is claimed. Related asymptotic work on the total number of commuting tuples (summed over $k$) is due to Bringmann, Franke and Heim \cite{BFH}, and a central limit theorem for the number of orbits at typical $k$ is due to Abdesselam and Starr \cite{AbdesselamStarr}.
+
+\subsection{Roadmap}
+Section~\ref{sec:results} fixes notation and states all results. Section~\ref{sec:lattice} proves a uniform lattice-point estimate, and Section~\ref{sec:factor} controls the arithmetic factor and proves the main asymptotic. Section~\ref{sec:euler} derives the Euler product. Section~\ref{sec:two} proves the two-orbit failure, and Section~\ref{sec:interior} the eventual log-concavity at $k\ge3$. Section~\ref{sec:uniform} proves the explicit error bound and the growing window. Section~\ref{sec:laws} proves the limiting laws. Section~\ref{sec:liminf} gives the exact limit inferior and superior, and Section~\ref{sec:explicit} the certified explicit counterexamples. Section~\ref{sec:checks} records consistency checks and open problems. Appendix~\ref{app:abstract} gives an abstract form of the leading-order argument.
+
+\section{Notation and main results}\label{sec:results}
+
+This section defines the arithmetic functions that describe $A(\ell,n,k)$ and states the theorems.
+
+\paragraph{Convolutions.} We write $\Dc$ for Dirichlet convolution and $\Ac$ for additive convolution:
+\[
+(f\Dc g)(n)=\sum_{d\mid n}f(d)g(n/d),\qquad (f\Ac g)(n)=\sum_{j=1}^{n-1}f(j)g(n-j).
+\]
+Let $\id^{\alpha}(n)=n^\alpha$ and $\one(n)=1$. Throughout, $p$ denotes a prime, $v_p(n)$ the exponent of $p$ in $n$, $\sigma_s(n)=\sum_{d\mid n}d^s$, and $\zeta$ the Riemann zeta function.
+
+\paragraph{The coefficient formula.} Put
+\begin{equation}\label{eq:B}
+B_\ell=\id^{0}\Dc\id^{1}\Dc\cdots\Dc\id^{\ell-1},\qquad b_\ell(n)=\frac{B_\ell(n)}n .
+\end{equation}
+$B_\ell(n)$ is the number of subgroups of index $n$ in $\mathbb Z^\ell$. The exponential formula of Bryan and Fulman \cite{BryanFulman} (see also \cite{ABDV}) gives, with $A(\ell,0,0)=1$ and $A(\ell,n,0)=0$ for $n>0$,
+\begin{equation}\label{eq:egf}
+\sum_{n,k\ge0}\frac{A(\ell,n,k)}{n!}x^kz^n=\exp\Bigl(x\sum_{n\ge1}\frac{B_\ell(n)}n z^n\Bigr),
+\qquad\text{so}\qquad
+A(\ell,n,k)=\frac{n!}{k!}\,b_\ell^{\Ac k}(n).
+\end{equation}
+In particular $A(\ell,n,1)=(n-1)!\,B_\ell(n)$.
+
+\paragraph{The arithmetic factor.} For $\ell\ge2$ set
+\begin{equation}\label{eq:h}
+h_\ell=\id^{-1}\Dc\id^{-2}\Dc\cdots\Dc\id^{-(\ell-1)},\qquad g_\ell=\one\Dc h_\ell,\qquad L=\ell-1 .
+\end{equation}
+Dividing each summand of $B_\ell(n)$ by $n^{\ell-1}$ gives
+\begin{equation}\label{eq:b}
+b_\ell(n)=n^{\ell-2}g_\ell(n).
+\end{equation}
+For $\ell=2$, $h_2(d)=1/d$ and $g_2=\sigma_{-1}$. For $k\ge2$ define the \emph{singular series}
+\begin{equation}\label{eq:sing}
+\Sing_{\ell,k}(n)=\sum_{\substack{d_1,\ldots,d_k\ge1\\ \gcd(d_1,\ldots,d_k)\mid n}}\frac{\gcd(d_1,\ldots,d_k)}{d_1\cdots d_k}\prod_{i=1}^k h_\ell(d_i),
+\end{equation}
+and set $\Sing_{\ell,1}(n)=g_\ell(n)$. (``Singular series'' is the standard name for such local-divisibility factors.) Lemma~\ref{lem:tail} shows that the series converges absolutely and that $1\le\Sing_{\ell,k}(n)\le C_{\ell,k}$ for a constant independent of $n$. Finally put
+\begin{equation}\label{eq:beta}
+\beta_{\ell,k}=\frac{\Gamma(L)^k}{\Gamma(kL)},\qquad
+R_{\ell,k}(n)=\frac{A(\ell,n,k)^2}{A(\ell,n,k-1)\,A(\ell,n,k+1)}\quad(2\le k\le n-1),
+\end{equation}
+so that \eqref{eq:conj} at $k$ is the statement $R_{\ell,k}(n)\ge1$.
+
+\begin{remark}[Normalisation]\label{rem:norm}
+Starr \cite{Starr2026a} works with $\alpha(n,k)=k!A(2,n,k)/n!$. Its log-concavity ratio is $\alpha(n,k)^2/(\alpha(n,k-1)\alpha(n,k+1))=\frac{k}{k+1}R_{2,k}(n)$. Since $k/(k+1)<1$, log-concavity of $\alpha$ implies that of $A$ but not conversely, and the two limits inferior differ by exactly the factor $(k+1)/k$. All statements below are about $R_{\ell,k}$, that is, about $A$ itself.
+\end{remark}
+
+\begin{theorem}[fixed-orbit asymptotic]\label{thm:asym}
+For all fixed integers $\ell\ge2$ and $k\ge2$,
+\begin{equation}\label{eq:asym}
+A(\ell,n,k)=\frac{n!}{k!}\,\beta_{\ell,k}\,n^{kL-1}\Bigl[\Sing_{\ell,k}(n)+O_{\ell,k}\Bigl(\frac{(1+\log n)^k}{n}\Bigr)\Bigr].
+\end{equation}
+The implied constant does not depend on $n$ or its prime factorisation. Since $\Sing_{\ell,k}(n)\ge1$, the same order bounds the relative error.
+\end{theorem}
+
+\begin{theorem}[two-orbit failure in every rank]\label{thm:fail}
+For every fixed $\ell\ge2$,
+\begin{equation}\label{eq:fail}
+\lim_{m\to\infty}R_{\ell,2}(m!)=0 .
+\end{equation}
+For every $\varepsilon>0$ there is an integer $Q\ge1$ such that $R_{\ell,2}(n)<\varepsilon$ for every sufficiently large multiple $n$ of $Q$; so the set of such $n$ has lower density at least $1/Q$ (and a natural density, by Theorem~\ref{thm:laws}). One $Q$ serves any finite set of ranks. In particular, Abdesselam's conjecture \eqref{eq:conj} fails in every rank $\ell\ge2$.
+\end{theorem}
+
+\begin{theorem}[eventual strict log-concavity at fixed $k\ge3$]\label{thm:interior}
+For all fixed $\ell\ge2$ and $k\ge3$, $\liminf_{n\to\infty}R_{\ell,k}(n)>1$. For $\ell\ge3$ the following explicit bounds hold:
+\begin{equation}\label{eq:lowerbounds}
+\liminf_{n\to\infty}R_{\ell,k}(n)\ge
+\begin{cases}
+\dfrac{2401}{1800}\exp\Bigl(-\dfrac{16}{1075}-\dfrac5{33}-\dfrac5{1188}\Bigr)>1.10, & k=3,\\[8pt]
+\exp\Bigl(\dfrac3k-\dfrac7{2^k}\Bigr)>1, & k\ge4.
+\end{cases}
+\end{equation}
+\end{theorem}
+
+The rank-two case of Theorems~\ref{thm:fail} and~\ref{thm:interior} is due to Starr \cite{Starr2026a}. The bounds \eqref{eq:lowerbounds} are uniform in $\ell$ and elementary; the exact values are given next.
+
+To state them, write $q_p(m)$, for a prime $p$ and $m\ge0$, for the probability that a sum of independent geometric random variables with ratios $p^{-2},p^{-3},\dots,p^{-\ell}$ is at least $m$ (a variable with ratio $r$ takes the value $e\ge0$ with probability $(1-r)r^e$). For $r\ge1$ and $v\ge0$ put
+\begin{equation}\label{eq:Lpr}
+L_{p,r}(v)=\sum_{m=0}^{v}p^m\bigl(q_p(m)^r-q_p(m+1)^r\bigr),\qquad
+K_{p,k}(v)=\frac{L_{p,k}(v)^2}{L_{p,k-1}(v)\,L_{p,k+1}(v)},
+\end{equation}
+and let
+\begin{equation}\label{eq:G}
+G_{L,k}=\frac{k+1}{k}\cdot\frac{\Gamma((k-1)L)\,\Gamma((k+1)L)}{\Gamma(kL)^2}.
+\end{equation}
+Section~\ref{sec:euler} shows that $\Sing_{\ell,r}(n)=C_\ell^{\,r}\prod_pL_{p,r}(v_p(n))$ with $C_\ell=\zeta(2)\cdots\zeta(\ell)$.
+
+\begin{theorem}[exact limit inferior and superior]\label{thm:liminf}
+For all fixed $\ell\ge2$ and $k\ge3$,
+\begin{equation}\label{eq:liminf}
+\liminf_{n\to\infty}R_{\ell,k}(n)=G_{L,k}\prod_p\inf_{v\ge0}K_{p,k}(v),\qquad
+\limsup_{n\to\infty}R_{\ell,k}(n)=G_{L,k}\prod_p\sup_{v\ge0}K_{p,k}(v),
+\end{equation}
+where both products converge absolutely to positive numbers. For $\ell=2$ the first formula is Starr's \cite[Corollary~2.4]{Starr2026a}, multiplied by $(k+1)/k$ (Remark~\ref{rem:norm}).
+\end{theorem}
+Table~\ref{tab:liminf} in Section~\ref{sec:liminf} evaluates these constants; for instance $\liminf R_{3,3}(n)\approx2.5168$, against the uniform bound $1.10$ in \eqref{eq:lowerbounds}.
+
+\begin{theorem}[explicit error and a finite log-concavity criterion]\label{thm:explicit}
+For integers $\ell\ge2$, $r\ge2$, $n\ge1$, put $H_n=1+\log n$,
+\[
+D_\ell=\prod_{j=2}^{\ell-1}\zeta(j),\qquad C_\ell=\prod_{j=2}^{\ell}\zeta(j),\qquad U_\ell=\sum_{d\ge1}h_\ell(d)^2,
+\]
+(empty products are $1$) and
+\begin{equation}\label{eq:E}
+E_{\ell,r}(n)=\frac1n\Bigl[4e\,D_\ell^{\,r}H_n^{\,r}\frac{\Gamma(rL)}{\Gamma(L)^r}+2r\,D_\ell C_\ell^{\,r-1}U_\ell\Bigr].
+\end{equation}
+Then
+\begin{equation}\label{eq:explicit}
+\Bigl|\frac{r!\,A(\ell,n,r)}{n!\,\beta_{\ell,r}\,n^{rL-1}\,\Sing_{\ell,r}(n)}-1\Bigr|\le E_{\ell,r}(n).
+\end{equation}
+If $k\ge3$ and $64k\,E_{\ell,k+1}(n)\le1$, then $R_{\ell,k}(n)\ge\exp(1/(8k))>1$.
+\end{theorem}
+
+The criterion is explicit but conservative: it first applies at about $n\approx10^{14.0}$ for $(\ell,k)=(3,3)$ and $n\approx10^{9.5}$ for $(2,3)$ (Section~\ref{sec:checks}), so it does not by itself reduce \eqref{eq:conj} at $k=3$ to a feasible computation.
+
+\begin{corollary}[a growing window of strict log-concavity]\label{cor:window}
+Fix $\ell\ge2$ and $0<c<1/\ell$. For all sufficiently large $n$, $R_{\ell,k}(n)>1$ for every integer $3\le k\le c\log n/\log\log n$.
+\end{corollary}
+
+\begin{theorem}[continuous limiting laws and densities]\label{thm:laws}
+For all fixed $\ell\ge2$ and $k\ge2$, the values $R_{\ell,k}(n)$, $n\ge k+1$, have a continuous limiting distribution on $(0,\infty)$: for every $t>0$ the limit
+\begin{equation}\label{eq:delta}
+\delta_{\ell,k}(t)=\lim_{x\to\infty}\frac1x\#\{k+1\le n\le x:\ R_{\ell,k}(n)<t\}
+\end{equation}
+exists, is continuous in $t$, and is unchanged if $<$ is replaced by $\le$. At two orbits,
+\begin{equation}\label{eq:delta2}
+\delta_{\ell,2}(t)>0\ \ (t>0),\qquad 0<\delta_{\ell,2}(1)<1 .
+\end{equation}
+\end{theorem}
+``Continuous'' means that the limit law has no atoms. By the Jessen--Wintner purity theorem (recalled in \cite{TenenbaumVerwee}) the law is either purely singular or absolutely continuous; we do not decide which. For $k\ge3$, Theorem~\ref{thm:interior} gives $\delta_{\ell,k}(t)=0$ for $t$ below the limit inferior.
+
+\begin{proposition}[explicit failures in ranks three and four]\label{prop:explicit}
+Let
+\[
+n_3=2^{9}\cdot3^{5}\cdot5^{3}\cdot7^{2}\cdot11^{2}\cdot13^{2}\cdot\prod_{17\le p\le109}p\ \approx\ 1.45\times10^{53}.
+\]
+Then $R_{3,2}(n_3)<0.9926$, so \eqref{eq:conj} fails at $(\ell,n,k)=(3,n_3,2)$. There is likewise an explicit $n_4\approx 2.8\times10^{844}$, with largest prime factor $1913$, such that $R_{4,2}(n_4)<0.99961$.
+\end{proposition}
+The integers are not claimed to be the smallest failures; the certificate is a rigorous interval computation resting on Theorem~\ref{thm:explicit} (Section~\ref{sec:explicit}). At rank two the same method confirms that the first counterexample of \cite{CHS2026} is a counterexample.
+
+\section{A uniform weighted lattice estimate}\label{sec:lattice}
+
+This section counts weighted lattice points in a simplex subject to divisibility conditions, with an error that is independent of the moduli. It is the only analytic input to the main asymptotic.
+
+\begin{lemma}[weighted arithmetic progressions]\label{lem:ap}
+Let $A,B\ge0$ be real. For all integers $n\ge1$, $q\ge1$ and $r$,
+\begin{equation}\label{eq:ap}
+\sum_{\substack{1\le m\le n-1\\ m\equiv r\ (\mathrm{mod}\ q)}}m^A(n-m)^B=\frac{\mathrm B(A+1,B+1)}{q}\,n^{A+B+1}+\theta\,n^{A+B},\qquad|\theta|\le4,
+\end{equation}
+where $\mathrm B$ is the beta function.
+\end{lemma}
+
+\begin{proof}
+Let $f(x)=x^A(n-x)^B$ on $I=[0,n]$ (with $0^0=1$). Then $0\le f\le n^{A+B}$, and $f$ is non-decreasing on $[0,x_0]$ and non-increasing on $[x_0,n]$ for some $x_0\in I$. We use the following elementary fact. Let $\phi\ge0$ be monotone on an interval $J=[\lambda,\mu]$, and let $m_1<\dots<m_s$ be points of $J$ with $m_{i+1}-m_i=q$, $m_1-\lambda\le q$ and $\mu-m_s\le q$. Then
+\[
+\Bigl|\sum_{i=1}^s\phi(m_i)-\frac1q\int_J\phi\Bigr|\le\sup_J\phi .
+\]
+Indeed, suppose $\phi$ is non-decreasing (the other case is symmetric). Since $\phi(m_i)\le\phi(x)$ for $x\ge m_i$, we have $q\sum_{i<s}\phi(m_i)\le\int_{m_1}^{m_s}\phi\le\int_J\phi$, so $q\sum_i\phi(m_i)\le\int_J\phi+q\sup_J\phi$. Since $\phi(m_i)\ge\phi(x)$ for $x\le m_i$, we have $q\sum_{i}\phi(m_i)\ge\int_\lambda^{m_s}\phi\ge\int_J\phi-q\sup_J\phi$. If $J$ contains no point of the progression, then $|J|<q$ and the bound is immediate.
+
+Apply this to $f$ on $[0,x_0]$ and on $[x_0,n]$, with the points $m\equiv r\pmod q$, $0\le m\le n$, lying in $[0,x_0]$ and in $(x_0,n]$ respectively; the total error is at most $2n^{A+B}$. The sum in \eqref{eq:ap} omits $m=0$ and $m=n$, which changes it by at most $f(0)+f(n)\le2n^{A+B}$. Finally $\int_0^nf=\mathrm B(A+1,B+1)\,n^{A+B+1}$. This gives $|\theta|\le4$ for all $n\ge1$, including $q>n$ and $n=1$.
+\end{proof}
+
+For $a\ge0$ and $j\ge1$ write $\gamma_{a,j}=\Gamma(a+1)^j/\Gamma(j(a+1))$, the volume factor of the $j$-fold simplex; note $\gamma_{\ell-2,k}=\beta_{\ell,k}$.
+
+\begin{lemma}[divisor-constrained simplex]\label{lem:simplex}
+Let $a\ge0$ and $k\ge2$. For positive integers $d_1,\ldots,d_k,n$ put $d=\gcd(d_1,\ldots,d_k)$, $s=k(a+1)$ and
+\[
+W_{\mathbf d}(n)=\sum_{\substack{n_1+\cdots+n_k=n\\ n_i\ge1,\ d_i\mid n_i}}\ \prod_{i=1}^kn_i^{a}.
+\]
+Then
+\begin{equation}\label{eq:simplex}
+W_{\mathbf d}(n)=\gamma_{a,k}\,n^{s-1}\,\one_{d\mid n}\,\frac{d}{d_1\cdots d_k}+\theta\,n^{s-2},\qquad|\theta|\le4e,
+\end{equation}
+uniformly in $a$, $k$, the $d_i$ and $n$.
+\end{lemma}
+
+\begin{proof}
+For $k=2$ the conditions $d_1\mid m$ and $d_2\mid n-m$ define an arithmetic progression modulo $\lcm(d_1,d_2)$ when $\gcd(d_1,d_2)\mid n$, and are insoluble otherwise. Lemma~\ref{lem:ap} with $A=B=a$, together with $\gcd\cdot\lcm=d_1d_2$, gives \eqref{eq:simplex} with $|\theta|\le4$.
+
+Let $k\ge3$ and assume the result for $k-1$ with constant $\mathcal E_{k-1}$. Put $d'=\gcd(d_2,\ldots,d_k)$, $P'=d_2\cdots d_k$ and $t=(k-1)(a+1)$. Fix $n_1=m$ and apply the induction hypothesis to $(n_2,\dots,n_k)$, which sum to $n-m$. The inherited errors total at most
+\[
+\mathcal E_{k-1}\sum_{m=1}^{n-1}m^a(n-m)^{t-2}\le\mathcal E_{k-1}\,n^{a+t-1}=\mathcal E_{k-1}\,n^{s-2},
+\]
+since $t-2\ge0$. The main terms give
+\[
+\gamma_{a,k-1}\frac{d'}{P'}\sum_{\substack{1\le m\le n-1\\ d_1\mid m,\ d'\mid n-m}}m^a(n-m)^{t-1}.
+\]
+The two congruences are soluble exactly when $\gcd(d_1,d')=d$ divides $n$, and then form one progression modulo $M=\lcm(d_1,d')$. Lemma~\ref{lem:ap} gives the main term
+\[
+\gamma_{a,k-1}\,\mathrm B(a+1,t)\,\frac{d'}{P'M}\,n^{s-1}=\gamma_{a,k}\,\frac{d}{d_1P'}\,n^{s-1},
+\]
+using $\gamma_{a,k-1}\mathrm B(a+1,t)=\gamma_{a,k}$ and $d'/M=d/d_1$, with a new error at most $4\gamma_{a,k-1}(d'/P')n^{s-2}\le4\gamma_{a,k-1}n^{s-2}$. Hence $\mathcal E_k\le\mathcal E_{k-1}+4\gamma_{a,k-1}$ and $\mathcal E_2\le4$. The simplex integral shows $\gamma_{a,j}\le1/(j-1)!$ for $a\ge0$ (each coordinate weight is at most $1$), and $\gamma_{a,1}=1$. Therefore $\mathcal E_k\le4\sum_{j=1}^{k-1}\gamma_{a,j}<4e$.
+\end{proof}
+
+No condition relating $n$ to $\lcm(d_1,\dots,d_k)$ is needed; the absolute error term is what allows large sparse moduli.
+
+\section{The arithmetic factor and the main asymptotic}\label{sec:factor}
+
+This section bounds the function $h_\ell$ and the tail of the singular series, and then proves Theorem~\ref{thm:asym}. Fix $\ell\ge2$ and write $h=h_\ell$.
+
+\begin{lemma}[bounds for $h_\ell$]\label{lem:h}
+The function $h$ is non-negative, multiplicative and submultiplicative: $h(uv)\le h(u)h(v)$. Moreover
+\begin{gather}
+\sum_{d\le x}h(d)\le D_\ell(1+\log x),\qquad \sum_{d\le x}d\,h(d)\le D_\ell\,x\qquad(x\ge1),\label{eq:h1}\\
+\sum_{d\ge1}\frac{h(d)}d=C_\ell,\qquad \sum_{d>x}\frac{h(d)}d\le\frac{2D_\ell}{x}\qquad(x>0),\label{eq:h2}
+\end{gather}
+and $U_\ell=\sum_dh(d)^2<\infty$.
+\end{lemma}
+
+\begin{proof}
+Multiplicativity is inherited from the Dirichlet factors. At a prime, $h(p^e)$ is the complete homogeneous symmetric polynomial of degree $e$ in $p^{-1},\dots,p^{-(\ell-1)}$. Every monomial of degree $e+f$ splits as a product of monomials of degrees $e$ and $f$, so it appears in the product $h(p^e)h(p^f)$; hence $h(p^{e+f})\le h(p^e)h(p^f)$, and submultiplicativity follows.
+
+For the first bound in \eqref{eq:h1}, isolate the factor $\id^{-1}$ (whose partial sums are at most $1+\log x$) and sum the remaining factors $\id^{-2},\dots,\id^{-(\ell-1)}$ absolutely, which gives $D_\ell$. For the second, let $u=\id^{-1}\Dc\cdots\Dc\id^{-(\ell-2)}$ (the Dirichlet identity if $\ell=2$). Multiplying each factor of $h$ by its argument gives $n\,h(n)=(\one\Dc u)(n)$, so
+\[
+\sum_{n\le x}n\,h(n)=\sum_{d\le x}u(d)\Bigl\lfloor\frac xd\Bigr\rfloor\le x\sum_d\frac{u(d)}d=D_\ell\,x .
+\]
+The identity in \eqref{eq:h2} is the product of the Dirichlet series $\prod_{j=1}^{\ell-1}\zeta(j+1)$. The tail bound follows from the second bound in \eqref{eq:h1} by partial summation when $x\ge1$, and from $C_\ell=D_\ell\zeta(\ell)<2D_\ell$ when $0<x<1$.
+
+Finally, $h_2(d)=1/d$; for $\ell\ge3$, $h_\ell(d)=d^{-1}g_{\ell-1}(d)\le D_{\ell-1}\,d^{-1}\sigma_{-1}(d)\le D_{\ell-1}(1+\log d)/d$, so $h^2$ is summable.
+\end{proof}
+
+\begin{lemma}[singular-series tail]\label{lem:tail}
+For fixed $k\ge2$ the series \eqref{eq:sing} converges absolutely, $1\le\Sing_{\ell,k}(n)\le C_\ell^{k-2}\cdot\sum_{d,e}h(d)h(e)\gcd(d,e)/(de)<\infty$, and
+\begin{equation}\label{eq:tail}
+0\le\Sing_{\ell,k}(n)-\Sing^{[N]}_{\ell,k}(n)\le\frac{2kD_\ell C_\ell^{k-1}U_\ell}{N},
+\end{equation}
+where $\Sing^{[N]}$ restricts every $d_i$ to $d_i\le N$.
+\end{lemma}
+
+\begin{proof}
+Using $\gcd(d,e)=\sum_{r\mid d,\,r\mid e}\varphi(r)$ and submultiplicativity,
+\[
+\begin{aligned}\sum_{d>N}\sum_{e\ge1}\frac{h(d)h(e)\gcd(d,e)}{de}
+&=\sum_{r\ge1}\frac{\varphi(r)}{r^2}\sum_{a>N/r}\sum_{b\ge1}\frac{h(ra)h(rb)}{ab}
+\\&\le C_\ell\sum_{r}\frac{\varphi(r)h(r)^2}{r^2}\sum_{a>N/r}\frac{h(a)}a
+\le\frac{2D_\ell C_\ell U_\ell}{N},\end{aligned}
+\]
+by \eqref{eq:h2} and $\varphi(r)\le r$. All terms are non-negative, so rearrangement is legitimate; the same computation without the restriction $d>N$ shows that the pair sum is finite. For a $k$-tuple, $\gcd(d_1,\dots,d_k)/(d_1\cdots d_k)\le\gcd(d_i,d_j)/(d_id_j)\cdot\prod_{r\ne i,j}d_r^{-1}$, which gives absolute convergence and the upper bound. A tuple omitted by the cut-off has some $d_i>N$; choose $j\ne i$, apply the pair bound, sum the other variables using \eqref{eq:h2}, and take a union bound over $i$. Dropping the condition $\gcd\mid n$ only enlarges the sum. The tuple $d_1=\cdots=d_k=1$ gives $\Sing_{\ell,k}(n)\ge1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:asym}]
+Set $a=\ell-2$. By \eqref{eq:egf} and \eqref{eq:b},
+\[
+b_\ell^{\Ac k}(n)=\sum_{n_1+\cdots+n_k=n}\ \prod_in_i^a\sum_{d_i\mid n_i}\prod_ih_\ell(d_i)=\sum_{d_1,\dots,d_k\le n}\prod_ih_\ell(d_i)\,W_{\mathbf d}(n).
+\]
+Lemma~\ref{lem:simplex} gives $b_\ell^{\Ac k}(n)=\beta_{\ell,k}n^{s-1}\Sing^{[n]}_{\ell,k}(n)+\theta\,n^{s-2}\bigl(\sum_{d\le n}h_\ell(d)\bigr)^k$ with $|\theta|\le4e$ and $s=kL$. By \eqref{eq:h1} the error is at most $4eD_\ell^kH_n^kn^{s-2}$, and by \eqref{eq:tail} with $N=n$ replacing $\Sing^{[n]}$ by $\Sing$ costs $O(n^{s-2})$. Multiplying by $n!/k!$ gives \eqref{eq:asym}.
+\end{proof}
+
+\section{Euler factors}\label{sec:euler}
+
+This section writes the singular series as a product of local factors, one for each prime, and checks that rank two gives Starr's formula. For a prime $p$ put
+\begin{equation}\label{eq:wT}
+w_{\ell,p}(e)=p^{-e}h_\ell(p^e),\qquad T_{\ell,p}(m)=\sum_{e\ge m}w_{\ell,p}(e).
+\end{equation}
+Since $h_\ell(p^e)$ is a complete homogeneous polynomial,
+\begin{equation}\label{eq:pgf}
+\sum_{e\ge0}h_\ell(p^e)z^e=\prod_{j=1}^{\ell-1}(1-p^{-j}z)^{-1},\qquad\text{so}\qquad T_{\ell,p}(0)=\prod_{j=2}^{\ell}(1-p^{-j})^{-1}.
+\end{equation}
+The summand of \eqref{eq:sing} is multiplicative in the tuple $(d_1,\dots,d_k)$, and the series converges absolutely, so grouping the local exponent tuples $(e_1,\dots,e_k)$ by their minimum $m$ (the condition $\gcd\mid n$ becomes $m\le v_p(n)$) gives
+\begin{equation}\label{eq:euler}
+\Sing_{\ell,k}(n)=\prod_p\Bigl\{\sum_{m=0}^{v_p(n)}p^m\bigl[T_{\ell,p}(m)^k-T_{\ell,p}(m+1)^k\bigr]\Bigr\}.
+\end{equation}
+Dividing by $T_{\ell,p}(0)^k$ and writing $q_p(m)=T_{\ell,p}(m)/T_{\ell,p}(0)$ gives $\Sing_{\ell,k}(n)=C_\ell^{\,k}\prod_pL_{p,k}(v_p(n))$ with $L_{p,k}$ as in \eqref{eq:Lpr}, because $\prod_pT_{\ell,p}(0)=C_\ell$. Since $w_{\ell,p}(e)/T_{\ell,p}(0)$ is the coefficient of $z^e$ in $\prod_{j=2}^{\ell}(1-p^{-j})/(1-p^{-j}z)$, the probability generating function of a sum of independent geometric variables with ratios $p^{-2},\dots,p^{-\ell}$, this $q_p(m)$ is the tail probability described before Theorem~\ref{thm:liminf}. For $k=1$,
+\begin{equation}\label{eq:L1}
+L_{p,1}(v)=\sum_{m=0}^v p^m\bigl(q_p(m)-q_p(m+1)\bigr)=\frac{\sum_{e\le v}h_\ell(p^e)}{T_{\ell,p}(0)}=\frac{g_\ell(p^v)}{T_{\ell,p}(0)},
+\end{equation}
+so $\Sing_{\ell,1}(n)=g_\ell(n)=C_\ell\prod_pL_{p,1}(v_p(n))$ as well.
+
+\paragraph{Rank two.} Here $h_2(p^e)=p^{-e}$, $q_p(m)=p^{-2m}$ and $L_{p,r}(v)=(1-p^{-2r})\sigma_{-(2r-1)}(p^v)$, so
+\begin{equation}\label{eq:rank2}
+\Sing_{2,k}(n)=\frac{\zeta(2)^k}{\zeta(2k)}\,\sigma_{-(2k-1)}(n).
+\end{equation}
+With Theorem~\ref{thm:asym} this is Starr's Corollary~2.2 \cite{Starr2026a}, which checks the gamma factor and the normalisation.
+
+\paragraph{Rank three.} With $x=p^{-1}$, a direct summation gives
+\[
+T_{3,p}(m)=\frac1{1-x}\Bigl(\frac{x^{2m}}{1-x^2}-\frac{x^{3m+1}}{1-x^3}\Bigr),
+\]
+and, for example, $A(3,n,2)\sim\frac{1}{12}n!\,n^{3}\,\Sing_{3,2}(n)$ and $A(3,n,3)\sim\frac1{720}n!\,n^{5}\,\Sing_{3,3}(n)$.
+
+\subsection{Ramanujan-expansion form}\label{sec:ramanujan}
+Let $c_r(n)$ be the Ramanujan sum and $\widehat g_\ell(r)=\sum_{m\ge1}h_\ell(rm)/(rm)$. Then
+\begin{equation}\label{eq:ram}
+\Sing_{\ell,k}(n)=\sum_{r\ge1}\widehat g_\ell(r)^k\,c_r(n).
+\end{equation}
+To see this, insert $d\,\one_{d\mid n}=\sum_{r\mid d}c_r(n)$ (with $d=\gcd(d_1,\ldots,d_k)$) into \eqref{eq:sing} and group the tuples whose entries are all divisible by $r$. The interchange is justified by absolute convergence: by submultiplicativity $\widehat g_\ell(r)\le C_\ell h_\ell(r)/r\ll_\ell(1+\log r)/r^2$, while $|c_r(n)|\le r$. Formula \eqref{eq:ram} expresses the leading term in the language of Ramanujan expansions of additive convolutions. The same computation shows that $g_\ell(n)=\sum_{r\ge1}\widehat g_\ell(r)c_r(n)$, a Ramanujan expansion that converges absolutely for each $n$. Gadiyar, Murty and Padma \cite[Theorem~10]{GMP} prove that if $f$ and $g$ have absolutely convergent Ramanujan expansions with coefficients $\widehat f(r)$, $\widehat g(s)$ satisfying $\sum_{r,s}|\widehat f(r)\widehat g(s)|(rs)^{1/2}d(r)d(s)<\infty$, where $d$ is the divisor function, then for $M<N$
+\[
+\sum_{n<M}f(n)g(N-n)=M\sum_{r\ge1}\widehat f(r)\widehat g(r)c_r(N)+o(M)\qquad(M\to\infty);
+\]
+they give the main steps of the proof and leave the details to the reader. Since $\widehat g_\ell(r)\ll_\ell(1+\log r)/r^2$, the hypothesis holds for $f=g=g_\ell$, and the main term is $M\,\Sing_{\ell,2}(N)$ by \eqref{eq:ram}. So the unweighted binary convolution of $g_\ell$ already fits their framework. For $\ell=2$ no weights occur ($b_2=\sigma_{-1}$), and the case $k=2$ of the leading term is their Theorem~13(a) with $\alpha=\beta=1$ \cite{GMP}; for $\ell\ge3$ the weights $m^{\ell-2}(N-m)^{\ell-2}$ would be handled by partial summation, as in their Theorem~13(b). For additive convolution sums with error terms when $M=o(N)$ see \cite{MSS}. We use the positive form \eqref{eq:sing} instead, because it treats every $k$, yields explicit uniform tails, and gives the local inequalities needed below. We claim no novelty for \eqref{eq:ram}.
+
+\section{The exceptional two-orbit boundary}\label{sec:two}
+
+This section proves Theorem~\ref{thm:fail}: the two-orbit ratio is controlled by $1/\sigma_{-1}(n)$. Isolating the factors $\one\Dc\id^{-1}=\sigma_{-1}$ in $g_\ell$ gives
+\begin{equation}\label{eq:gsig}
+\sigma_{-1}(n)\le g_\ell(n)\le D_\ell\,\sigma_{-1}(n),
+\end{equation}
+where the upper bound uses that the remaining factors have total mass $D_\ell$ and that $\sigma_{-1}(n/d)\le\sigma_{-1}(n)$ for $d\mid n$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:fail}]
+By Theorem~\ref{thm:asym} and the exact one-orbit formula $A(\ell,n,1)=(n-1)!\,n^{L}g_\ell(n)$,
+\begin{equation}\label{eq:R2}
+R_{\ell,2}(n)=G_{L,2}\,\frac{\Sing_{\ell,2}(n)^2}{g_\ell(n)\,\Sing_{\ell,3}(n)}\bigl(1+o(1)\bigr),\qquad G_{L,2}=\frac32\frac{\beta_{\ell,2}^2}{\beta_{\ell,3}} .
+\end{equation}
+The singular series are bounded above by Lemma~\ref{lem:tail} and below by $1$, so by \eqref{eq:gsig} there is $K_\ell$ with $R_{\ell,2}(n)\le K_\ell/\sigma_{-1}(n)$ for all large $n$. Every $j\le m$ divides $m!$, so $\sigma_{-1}(m!)\ge\sum_{j\le m}1/j\to\infty$, proving \eqref{eq:fail}. If $Q=m!$ then every multiple $n$ of $Q$ has $\sigma_{-1}(n)\ge\sigma_{-1}(Q)$; choosing $m$ with $K_\ell/\sigma_{-1}(m!)<\varepsilon$ and discarding finitely many multiples proves the density statement. For finitely many ranks take the largest $K_\ell$ and threshold. (The same device, $\sigma_{-1}(Qn)\ge\sigma_{-1}(Q)$, gives the lower-density bound of \cite{CHS2026} at rank two.)
+\end{proof}
+
+\subsection{A bound without asymptotics}
+The failure can also be seen from elementary inequalities. Let $M_0=\sum_{d,e\ge1}\gcd(d,e)/(d^2e^2)=\zeta(2)^2\zeta(3)/\zeta(4)=\tfrac52\zeta(3)$. Counting multiples of $\lcm(d,e)$ gives $\sum_{r\le X}\sigma_{-1}(r)^2\le XM_0$, and Cauchy--Schwarz with \eqref{eq:gsig} and $r(n-r)\le n^2/4$ gives, with $a=\ell-2$,
+\[
+b_\ell^{\Ac2}(n)\le\frac{D_\ell^2M_0}{4^a}\,n^{2a}(n-1).
+\]
+For integer $a\ge0$, $r^a\ge a!\binom{r-1}{a}$; cubing $\sum_{r\ge1}\binom{r-1}{a}z^r=z^{a+1}(1-z)^{-a-1}$ gives $b_\ell^{\Ac3}(n)\ge(a!)^3\binom{n-1}{3a+2}$. Together with $b_\ell(n)\ge n^a\sigma_{-1}(n)$, for $n\ge3a+3$,
+\begin{equation}\label{eq:elem}
+R_{\ell,2}(n)\le\frac{3D_\ell^4M_0^2}{2\cdot16^a(a!)^3}\cdot\frac{n^{3a}(n-1)^2}{\binom{n-1}{3a+2}\,\sigma_{-1}(n)} .
+\end{equation}
+The factor depending on $n$ apart from $1/\sigma_{-1}(n)$ tends to $(3a+2)!$, so the conclusions of Theorem~\ref{thm:fail} follow again (with worse constants).
+
+\section{Eventual strict log-concavity at fixed \texorpdfstring{$k\ge3$}{k>=3}}\label{sec:interior}
+
+This section proves Theorem~\ref{thm:interior}. The arithmetic factor need not converge as $n\to\infty$, so we bound each local factor uniformly in the valuation.
+
+\subsection{Local bounds}
+Let $u_p=1/(p(p-1))$. If a sum of independent geometric variables with ratios $p^{-2},\dots,p^{-\ell}$ is at least $m$, then one can allot $m$ units among them so that each variable is at least its allotment; a union bound and the multinomial theorem give
+\begin{equation}\label{eq:qbound}
+q_p(m)\le\sum_{e_2+\cdots+e_\ell=m}\ \prod_{j=2}^{\ell}p^{-je_j}\le\Bigl(\sum_{j=2}^{\ell}p^{-j}\Bigr)^m\le u_p^m .
+\end{equation}
+Every summand of $L_{p,r}(v)$ is non-negative, and summation by parts gives $L_{p,r}(v)=1+(p-1)\sum_{m=1}^{v}p^{m-1}q_p(m)^r-p^vq_p(v+1)^r$. Hence, by \eqref{eq:qbound}, for $r\ge2$,
+\begin{equation}\label{eq:Lbounds}
+1-u_p^r\le L_{p,r}(v)\le1+\frac{(p-1)u_p^r}{1-pu_p^r}.
+\end{equation}
+With $P_r=\prod_p(1-u_p^r)$ and $Q_r=\prod_p\bigl(1+(p-1)u_p^r/(1-pu_p^r)\bigr)$, the powers of $C_\ell$ cancel in the ratio, and
+\begin{equation}\label{eq:SingRatio}
+\frac{\Sing_{\ell,k}(n)^2}{\Sing_{\ell,k-1}(n)\Sing_{\ell,k+1}(n)}\ge\frac{P_k^2}{Q_{k-1}Q_{k+1}}\qquad(k\ge3).
+\end{equation}
+
+\subsection{Elementary bounds for the products}
+For integers $p\ge3$, $u_p\le1/6$ and $u_p\le3/(2p^2)$. Bounding sums over primes by sums over integers,
+\[
+\sum_{p\ge3}u_p^3\le\frac{27}{8}\Bigl(3^{-6}+\int_3^\infty x^{-6}dx\Bigr)=\frac1{135},\qquad
+\sum_{p\ge3}(p-1)u_p^2\le\frac32\Bigl(3^{-3}+\int_3^\infty x^{-3}dx\Bigr)=\frac5{36}.
+\]
+Using $1-u_p^t\ge215/216$ and $pu_p^r\le1/12$ for $p\ge3$, it follows that for $t\ge3$ and $r\ge2$
+\begin{equation}\label{eq:sums}
+\sum_{p\ge3}\frac{u_p^t}{1-u_p^t}\le\frac{8}{1075}\,6^{-(t-3)},\qquad
+\sum_{p\ge3}\frac{(p-1)u_p^r}{1-pu_p^r}\le\frac5{33}\,6^{-(r-2)} .
+\end{equation}
+We also use $\log(1-x)\ge-x/(1-x)$ and $\log(1+x)\le x$.
+
+\subsection{The gamma factor}
+Theorem~\ref{thm:asym} gives, for fixed $k\ge3$,
+\[
+R_{\ell,k}(n)=G_{L,k}\,\frac{\Sing_{\ell,k}(n)^2}{\Sing_{\ell,k-1}(n)\Sing_{\ell,k+1}(n)}\bigl(1+o(1)\bigr),
+\]
+with $G_{L,k}$ as in \eqref{eq:G}; the factor $(k+1)/k$ comes from the factorials in \eqref{eq:egf}. For $L=2$, $G_{2,k}=\frac{(k+1)(2k+1)}{(k-1)(2k-1)}$. For integer $L\ge3$,
+\[
+\frac{\Gamma((k+1)L)\Gamma((k-1)L)}{\Gamma(kL)^2}=\prod_{j=0}^{L-1}\frac{kL+j}{(k-1)L+j}>\Bigl(\frac{k+1}{k}\Bigr)^L,
+\]
+since each factor exceeds $(k+1)/k$ (cross-multiplying leaves $L-j>0$). Also $((k+1)/k)^4\ge G_{2,k}$ for $k\ge3$: clearing denominators and cancelling the common factor $k+1$ leaves $2k^2(k-2)(k+1)+1>0$. Thus $G_{L,k}\ge G_{2,k}$ for every integer $L\ge2$, and
+\begin{equation}\label{eq:Gbound}
+\log G_{2,k}=\log\frac{1+1/k}{1-1/k}+\log\frac{1+1/(2k)}{1-1/(2k)}\ge\frac3k .
+\end{equation}
+
+\subsection{Three orbits}
+The prime $2$ has $u_2=1/2$. Separating it and using \eqref{eq:sums},
+\[
+P_3\ge\tfrac78e^{-8/1075},\qquad Q_2\le\tfrac32e^{5/33},\qquad Q_4\le\tfrac{15}{14}e^{5/1188}.
+\]
+For $\ell\ge3$, $G_{L,3}\ge G_{2,3}=14/5$, and \eqref{eq:SingRatio} gives the first bound in \eqref{eq:lowerbounds}, since $\frac{14}5\cdot\frac{(7/8)^2}{(3/2)(15/14)}=\frac{2401}{1800}$. Its size follows from rational inequalities: $\frac{16}{1075}+\frac5{33}+\frac5{1188}<\frac7{40}$ and $\frac{2401}{1800}(1-\frac7{40})=\frac{79233}{72000}>1.10$, using $e^{-x}\ge1-x$.
+
+\subsection{Four or more orbits}
+Let $t_k=2^{-(k-3)}$. The prime $2$ and \eqref{eq:sums} give
+\[
+-2\log P_k\le\Bigl(\tfrac4{15}+\tfrac{16}{1075}\Bigr)t_k<\tfrac3{10}t_k,\quad
+\log Q_{k-1}\le\Bigl(\tfrac13+\tfrac5{33}\Bigr)t_k<\tfrac12t_k,
+\]
+\[
+\log Q_{k+1}\le\Bigl(\tfrac1{15}+\tfrac5{1188}\Bigr)t_k<\tfrac3{40}t_k .
+\]
+With \eqref{eq:Gbound},
+\[
+\log\frac{G_{L,k}P_k^2}{Q_{k-1}Q_{k+1}}\ge\frac3k-\frac78t_k=\frac3k-\frac7{2^k}>0 ,
+\]
+which holds at $k=4$ and persists because $2^k/k$ increases. This proves \eqref{eq:lowerbounds}.
+
+\subsection{Rank two}
+For $\ell=2$ the exact tails $q_p(m)=p^{-2m}$ replace $u_p$ by $p^{-2}$ in \eqref{eq:Lbounds}. Integral comparison over all integers $p\ge2$ gives, for $k\ge3$ and $r\ge2$,
+\[
+2\sum_{p\ge2}\frac{p^{-2k}}{1-p^{-2k}}\le\frac{128}{45}4^{-k}<3\cdot4^{-k},\qquad
+\sum_{p\ge2}\frac{(p-1)p^{-2r}}{1-p^{1-2r}}\le\frac{32}7 4^{-r}<5\cdot4^{-r},
+\]
+using $1-p^{-2k}\ge63/64$ and $1-p^{1-2r}\ge7/8$. With $G_{1,k}=(k+1)/(k-1)$, $\log G_{1,k}\ge2/k$, so $\liminf R_{2,k}(n)\ge\exp(2/k-25/4^k)>1$. This independent proof of Starr's qualitative statement completes the proof of Theorem~\ref{thm:interior}. \qed
+
+\section{Explicit bounds and growing orbit counts}\label{sec:uniform}
+
+This section proves Theorem~\ref{thm:explicit} and Corollary~\ref{cor:window} by keeping every constant explicit, and then lets both $\ell$ and $k$ vary.
+
+\begin{proof}[Proof of Theorem~\ref{thm:explicit}]
+The proof of Theorem~\ref{thm:asym} gives \[|b_\ell^{\Ac r}(n)-\beta_{\ell,r}n^{rL-1}\Sing^{[n]}_{\ell,r}(n)|\le4e\,n^{rL-2}D_\ell^rH_n^r.\] Dividing by $\beta_{\ell,r}n^{rL-1}\Sing_{\ell,r}(n)\ge\beta_{\ell,r}n^{rL-1}$ and adding the tail \eqref{eq:tail} with $N=n$ gives \eqref{eq:explicit} for all $\ell,r,n$.
+
+Let $\mathcal A_{\ell,n,r}=\frac{n!}{r!}\beta_{\ell,r}n^{rL-1}\Sing_{\ell,r}(n)$. The bounds of Section~\ref{sec:interior} hold for each $n$ before any error is introduced, and give
+\begin{equation}\label{eq:mainratio}
+\frac{\mathcal A_{\ell,n,k}^2}{\mathcal A_{\ell,n,k-1}\mathcal A_{\ell,n,k+1}}\ge\exp\Bigl(\frac1{4k}\Bigr)\qquad(\ell\ge2,\ k\ge3).
+\end{equation}
+Indeed, for $\ell\ge3$, $k\ge4$, $3/k-7/2^k\ge1/k$; at $k=3$ the bound exceeds $11/10$ and $\log(11/10)>1/12$; for $\ell=2$, $2/k-25/4^k\ge1/(4k)$ for $k\ge3$. For fixed $\ell,n$, $E_{\ell,r}(n)$ increases with $r$, because $D_\ell,H_n,C_\ell\ge1$ and $\beta_{\ell,r}/\beta_{\ell,r+1}=\Gamma((r+1)L)/(\Gamma(rL)\Gamma(L))\ge1$. If $u=E_{\ell,k+1}(n)\le1/(64k)$, the three relative errors at $k-1,k,k+1$ are at most $u<1/2$; since $|\log(1+x)|\le2|x|$ for $|x|\le1/2$, they change $\log R_{\ell,k}(n)$ by at most $8u$, so $\log R_{\ell,k}(n)\ge\frac1{4k}-8u\ge\frac1{8k}$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:window}]
+Let $K=\lfloor c\log n/\log\log n\rfloor$ and $r=K+1$. With $\ell$ fixed, Stirling's formula gives for the logarithm of the first term of $E_{\ell,r}(n)$
+\[
+\begin{aligned}-\log n+\log\Gamma(rL)-r\log\Gamma(L)+r\log H_n+O_\ell(r)&=-\log n+rL\log r+r\log\log n+O_\ell(r)\\&=-(1-c\ell+o(1))\log n,\end{aligned}
+\]
+because $r\log r$ and $r\log\log n$ are both asymptotic to $c\log n$. The second term is $n^{-1+o(1)}$. Hence $K\,E_{\ell,K+1}(n)\to0$, and Theorem~\ref{thm:explicit}, with the monotonicity of $E$ in $r$, applies to every $3\le k\le K$ at once.
+\end{proof}
+
+The exponent $1/\ell=1/(L+1)$ has two sources: the factor $\Gamma(rL)/\Gamma(L)^r=\beta_{\ell,r}^{-1}$ (about $e^{rL\log r}$), which appears because the lattice error in Lemma~\ref{lem:simplex} is absolute while the main term carries the simplex volume, and the factor $H_n^r$ (about $e^{r\log\log n}$) from summing $h_\ell$ over all divisors up to $n$. It reflects the method; we do not know the true extent of the window.
+
+\subsection{Letting the rank vary}
+Since $\sum_{j\ge2}(\zeta(j)-1)=\sum_{m\ge2}1/(m(m-1))=1$, we have $D_\ell\le C_\ell\le e$. Lemma~\ref{lem:h} gives $h_\ell(d)\le e(1+\log d)/d$, and $\int_1^\infty(1+\log x)^2x^{-2}\,dx=5$ gives $U_\ell\le6e^2$. Therefore
+\begin{equation}\label{eq:Erank}
+E_{\ell,r}(n)\le\frac1n\Bigl[4e^{r+1}H_n^r\frac{\Gamma(rL)}{\Gamma(L)^r}+12r\,e^{r+2}\Bigr].
+\end{equation}
+For integer $L\ge1$, $\Gamma(rL)/\Gamma(L)^r\le r^{rL-1}L^{r-1}$: with $q=r(L-1)$, the multinomial coefficient $q!/((L-1)!)^r$ is at most $r^q$, and the remaining $r-1$ factors of $(rL-1)!/q!$ are each at most $rL$. Put $M(n,\ell,r)=(rL-1)\log r+(r-1)\log L+r\log(1+\log n)+r$; then $E_{\ell,r}(n)\le120e^{M(n,\ell,r)}/n$. If $\eta>0$ is fixed and $M(n,\ell,k+1)\le(1-\eta)\log n$, then $k=O(\log n)$ and $E_{\ell,k+1}(n)\le120n^{-\eta}$, so strict log-concavity holds for all such pairs $(\ell,k)$ once $n$ is large. For fixed $k$ this includes every range $\ell\le c\log n$ with $c<1/((k+1)\log(k+1))$. These ranges are sufficient, not optimal.
+
+\section{Limiting distributions and the density of failures}\label{sec:laws}
+
+This section proves Theorem~\ref{thm:laws}. The logarithm of the leading ratio is an additive arithmetic function, and the Erd\H{o}s--Wintner theorem applies to it.
+
+\subsection{An additive function}
+Fix $\ell\ge2$, $k\ge2$, and recall $K_{p,k}(v)$ from \eqref{eq:Lpr}, now including $r=1$ via \eqref{eq:L1}. Put
+\begin{equation}\label{eq:alpha}
+\alpha_{\ell,k}=G_{L,k}\prod_pK_{p,k}(0),\qquad f_{\ell,k}(p^v)=\log\frac{K_{p,k}(v)}{K_{p,k}(0)},\qquad f_{\ell,k}(n)=\sum_{p\mid n}f_{\ell,k}(p^{v_p(n)}).
+\end{equation}
+Since $L_{p,r}(0)=1-q_p(1)^r$ and $q_p(1)=O(p^{-2})$, the product converges to a positive number. Theorem~\ref{thm:asym}, the identity $\Sing_{\ell,r}=C_\ell^r\prod_pL_{p,r}$ for $r\ge1$, and the exact one-orbit formula give
+\begin{equation}\label{eq:logR}
+\log R_{\ell,k}(n)=\log\alpha_{\ell,k}+f_{\ell,k}(n)+O_{\ell,k}\Bigl(\frac{(1+\log n)^{k+1}}n\Bigr);
+\end{equation}
+all powers of $C_\ell$ cancel.
+
+\subsection{Size of the prime increments}
+For every fixed $r\ge1$, uniformly in $v\ge1$,
+\begin{equation}\label{eq:incr}
+\log\frac{L_{p,r}(v)}{L_{p,r}(0)}=p^{1-2r}\bigl(1+O_{\ell,r}(p^{-1})\bigr)\qquad(p\to\infty).
+\end{equation}
+Indeed $q_p(1)=1-\prod_{j=2}^{\ell}(1-p^{-j})=p^{-2}+O_\ell(p^{-3})$ and $q_p(m)\le u_p^m$, so
+\[
+\begin{aligned}L_{p,r}(v)-L_{p,r}(0)&=p\bigl(q_p(1)^r-q_p(2)^r\bigr)+\sum_{m=2}^vp^m\bigl(q_p(m)^r-q_p(m+1)^r\bigr)\\&=p^{1-2r}\bigl(1+O(p^{-1})\bigr)+O_r(p^{2-4r}),\end{aligned}
+\]
+where for $p\ge3$ the last sum is at most $(pu_p^r)^2/(1-pu_p^r)$ independently of $v$. Dividing by $L_{p,r}(0)=1+O(p^{-2r})$ gives \eqref{eq:incr}. Applying it at $r=k-1,k,k+1$, the smallest index dominates:
+\begin{equation}\label{eq:fp}
+f_{\ell,k}(p^v)=-p^{3-2k}\bigl(1+O_{\ell,k}(p^{-1})\bigr)\qquad(v\ge1).
+\end{equation}
+So $f_{\ell,k}(p)<0$ for all large $p$, and there is $B_{\ell,k}$ with
+\begin{equation}\label{eq:fbound}
+|f_{\ell,k}(p^v)|\le B_{\ell,k}\,p^{3-2k}\qquad(p\text{ prime},\ v\ge1),
+\end{equation}
+because for the finitely many small primes the factors with $r\ge2$ are bounded above and away from $0$ by \eqref{eq:Lbounds}, and $L_{p,1}(v)$ lies between $L_{p,1}(0)$ and $\sum_{e\ge0}h_\ell(p^e)/T_{\ell,p}(0)$ by \eqref{eq:L1}.
+
+\subsection{Proof of Theorem~\ref{thm:laws}}
+The Erd\H{o}s--Wintner theorem \cite{ErdosWintner} states that a real additive function $f$ has a limiting distribution if and only if
+\begin{equation}\label{eq:EW}
+\sum_p\frac{\min\{1,f(p)^2\}}p<\infty\qquad\text{and}\qquad\sum_{p:\,|f(p)|\le1}\frac{f(p)}p\ \text{converges},
+\end{equation}
+and then, by a theorem of L\'evy, the law is continuous exactly when $\sum_{p:\,f(p)\ne0}1/p=\infty$ (see \cite[(1.1)--(1.2)]{TenenbaumVerwee} and \cite[Sections~8 and~13]{ErdosWintner}). The earliest non-trivial instance, recorded in \cite{ErdosWintner}, is Schoenberg's treatment of $\log(\varphi(n)/n)$; our application is of the same kind.
+
+For $f=f_{\ell,k}$, \eqref{eq:fbound} makes both series in \eqref{eq:EW} absolutely convergent, and \eqref{eq:fp} with the divergence of $\sum_p1/p$ gives continuity. Let $F_{\ell,k}$ be the distribution function. Fix $\eta>0$. By \eqref{eq:logR}, for all large $n$ the event $R_{\ell,k}(n)<t$ contains the event $f_{\ell,k}(n)<\log(t/\alpha_{\ell,k})-\eta$ and is contained in the event $f_{\ell,k}(n)<\log(t/\alpha_{\ell,k})+\eta$. Averaging over $n\le x$, letting $x\to\infty$ and then $\eta\to0$, continuity of $F_{\ell,k}$ gives
+\begin{equation}\label{eq:deltaF}
+\delta_{\ell,k}(t)=F_{\ell,k}\bigl(\log(t/\alpha_{\ell,k})\bigr),
+\end{equation}
+for both strict and weak inequalities.
+
+\paragraph{A random Euler product.} Let $V_p$ be independent with $\mathbb P(V_p=v)=(1-p^{-1})p^{-v}$, $v\ge0$ (the law of $v_p$ of a random integer). Since $\sum_p\mathbb E|f_{\ell,k}(p^{V_p})|\le B_{\ell,k}\sum_pp^{2-2k}<\infty$, the series $Z_{\ell,k}=\sum_pf_{\ell,k}(p^{V_p})$ converges almost surely and in mean; its characteristic function $\prod_p(1-p^{-1})\sum_{v\ge0}p^{-v}e^{itf_{\ell,k}(p^v)}$ is the Erd\H{o}s--Wintner characteristic function. So the limit law of $R_{\ell,k}(n)$ is that of
+\begin{equation}\label{eq:Y}
+Y_{\ell,k}=\alpha_{\ell,k}\exp\Bigl(\sum_pf_{\ell,k}(p^{V_p})\Bigr)=G_{L,k}\prod_pK_{p,k}(V_p),
+\end{equation}
+which is positive almost surely.
+
+\paragraph{Two orbits.} Theorem~\ref{thm:fail} gives $\delta_{\ell,2}(t)>0$ for every $t>0$. For $\delta_{\ell,2}(1)<1$ we need $\mathbb P(Y_{\ell,2}>1)>0$. First, $\alpha_{\ell,k}>1$ for every $k\ge2$: with $q=q_p(1)\in(0,1)$,
+\begin{equation}\label{eq:K0}
+K_{p,k}(0)-1=\frac{q^{k-1}(1-q)^2}{(1-q^{k-1})(1-q^{k+1})}>0,
+\end{equation}
+and $G_{L,k}>1$ by log-convexity of $\Gamma$ and the factor $(k+1)/k$. Choose a prime cut-off beyond which the mean absolute tail of $Z_{\ell,2}$ is below $\frac14\log\alpha_{\ell,2}$; with probability greater than $\frac12$ the tail is below $\frac12\log\alpha_{\ell,2}$ in absolute value. Independently, all primes below the cut-off have $V_p=0$ with positive probability. On the intersection $Y_{\ell,2}>\sqrt{\alpha_{\ell,2}}>1$. This proves \eqref{eq:delta2}.
+
+At rank two the leading ratio is $\frac{30}7\,\sigma_{-3}(n)^2/(\sigma_{-1}(n)\sigma_{-5}(n))$, with $\alpha_{2,2}=3\zeta(2)\zeta(6)/\zeta(4)^2=30/7$, which again checks the normalisation. Theorem~\ref{thm:laws} shows that the density whose upper and lower bounds were found in \cite{CHS2026} exists; it does not improve their numerical bounds.
+
+\subsection{Right half-plane roots}
+The same mechanism extends a rank-two result of \cite{CHNST2026}. Let $P_{\ell,n}(X)=\sum_{k=1}^nA(\ell,n,k)X^k/n!$. For every fixed $\ell\ge2$, the reduced polynomial $P_{\ell,n}(X)/X$ has a root in the open right half-plane for a set of $n$ of positive lower density. Indeed, for a polynomial $c_0+c_1X+\cdots+c_dX^d$ with positive coefficients, the second Hurwitz determinant of the reversed coefficient sequence is $c_1c_2-c_0c_3$, and a negative Hurwitz determinant forces a root in the open right half-plane (see \cite[Section~2.1]{CHNST2026}); inversion $X\mapsto1/X$ preserves the sign of the real part of a non-zero root. For $P_{\ell,n}(X)/X$ this determinant has the sign of $A(\ell,n,2)A(\ell,n,3)-A(\ell,n,1)A(\ell,n,4)$, and Theorem~\ref{thm:asym} gives
+\[
+\frac{A(\ell,n,2)A(\ell,n,3)}{A(\ell,n,1)A(\ell,n,4)}=2\frac{\beta_{\ell,2}\beta_{\ell,3}}{\beta_{\ell,4}}\cdot\frac{\Sing_{\ell,2}(n)\Sing_{\ell,3}(n)}{g_\ell(n)\Sing_{\ell,4}(n)}\bigl(1+o(1)\bigr)=O_\ell\bigl(\sigma_{-1}(n)^{-1}\bigr).
+\]
+The argument of Section~\ref{sec:two} makes this ratio less than one on all large multiples of a suitable integer. The rank-two case is due to \cite{CHNST2026}. The argument of this section applies verbatim to this ratio (its prime increments are $-p^{-1}(1+O(p^{-1}))$, and its constant exceeds $1$ because $(1-q^2)(1-q^3)-(1-q)(1-q^4)=q(1-q)(1-q^2)>0$ and $2\Gamma(4L)\Gamma(L)>\Gamma(2L)\Gamma(3L)$), so the set where the second Hurwitz determinant is negative has a natural density strictly between $0$ and $1$. We make no claim about the density of all non-Hurwitz cases.
+
+\section{The exact limit inferior and limit superior}\label{sec:liminf}
+
+This section proves Theorem~\ref{thm:liminf} and evaluates the constants. The idea is that the valuations of $n$ at finitely many primes can be prescribed freely, while the remaining primes contribute almost nothing.
+
+\begin{proof}[Proof of Theorem~\ref{thm:liminf}]
+Fix $\ell\ge2$, $k\ge3$, and write $\kappa_p^-=\inf_{v\ge0}K_{p,k}(v)$ and $\kappa_p^+=\sup_{v\ge0}K_{p,k}(v)$. By \eqref{eq:fbound}, $|\log K_{p,k}(v)-\log K_{p,k}(0)|\le B_{\ell,k}p^{3-2k}$ for all $v$, and by \eqref{eq:K0}, $0\le\log K_{p,k}(0)\le c_{\ell,k}\,p^{-2(k-1)}$ (since $q_p(1)\le2p^{-2}$). Hence $\kappa_p^\pm$ are positive, $|\log\kappa_p^\pm|\le(B_{\ell,k}+c_{\ell,k})p^{3-2k}$, and since $3-2k\le-3$ both products $\prod_p\kappa_p^\pm$ converge absolutely.
+
+\emph{Lower bound.} By \eqref{eq:logR}, $\log R_{\ell,k}(n)=\log G_{L,k}+\sum_p\log K_{p,k}(v_p(n))+o(1)\ge\log G_{L,k}+\sum_p\log\kappa_p^-+o(1)$, which gives $\liminf R_{\ell,k}(n)\ge G_{L,k}\prod_p\kappa_p^-$.
+
+\emph{Upper bound.} Let $\varepsilon>0$. Choose $P$ with $\sum_{p>P}2(B_{\ell,k}+c_{\ell,k})p^{3-2k}<\varepsilon$, and for each $p\le P$ choose $v_p\ge0$ with $\log K_{p,k}(v_p)<\log\kappa_p^-+\varepsilon/\pi(P)$. Let $n_0=\prod_{p\le P}p^{v_p}$ and $n=n_0p_0$ with $p_0>P$ prime. Then $v_p(n)=v_p$ for $p\le P$, $v_{p_0}(n)=1$, and $v_p(n)=0$ for all other $p$. So
+\[
+\sum_p\log K_{p,k}(v_p(n))\le\sum_{p\le P}\log\kappa_p^-+\varepsilon+\sum_{p>P}\log K_{p,k}(0)+|f_{\ell,k}(p_0)|
+\le\sum_p\log\kappa_p^-+2\varepsilon+B_{\ell,k}p_0^{3-2k}.
+\]
+Letting $p_0\to\infty$ through primes, $n\to\infty$ and \eqref{eq:logR} gives $\liminf R_{\ell,k}(n)\le G_{L,k}\exp(2\varepsilon)\prod_p\kappa_p^-$. Since $\varepsilon$ is arbitrary, the first formula in \eqref{eq:liminf} follows. The limit superior is proved in the same way with $\sup$ in place of $\inf$.
+
+\emph{Rank two.} By Section~\ref{sec:euler}, $K_{p,k}(v)=\frac{(1-p^{-2k})^2}{(1-p^{-2k+2})(1-p^{-2k-2})}\cdot\frac{\sigma_{-(2k-1)}(p^v)^2}{\sigma_{-(2k-3)}(p^v)\,\sigma_{-(2k+1)}(p^v)}$. Starr \cite[Corollary~2.4 and Appendix~B]{Starr2026a} shows that at each prime the second factor exceeds its limit as $v\to\infty$, so that the infimum over $v$ is that limit, and that the product of these limits equals $\zeta(2k-1)^2/(\zeta(2k-3)\zeta(2k+1))$; with the first factor and $G_{1,k}=(k+1)/(k-1)$ this is his formula multiplied by $(k+1)/k$.
+\end{proof}
+
+\paragraph{Numerical values.} Table~\ref{tab:liminf} evaluates \eqref{eq:liminf} numerically (40-digit arithmetic, primes below $10^5$, valuations up to $60$ at small primes together with the limit $v\to\infty$). At rank two the values agree with Starr's closed formula to the working accuracy. In every case computed, $K_{p,k}(v)$ was non-increasing in $v$, so that the infimum is the limit as $v\to\infty$ and the supremum is $K_{p,k}(0)$; in particular the limit superior equals $\alpha_{\ell,k}$, approached along integers free of small prime factors. We have not proved this monotonicity in general.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+$\ell$ & $k$ & $G_{L,k}$ & $\liminf R_{\ell,k}$ & $\limsup R_{\ell,k}$ & elementary bound (Sec.~\ref{sec:interior})\\
+\midrule
+2 & 3 & $2$ & 1.8629 & 2.1000 & 1.318\\
+2 & 4 & $5/3$ & 1.6475 & 1.6835 & 1.495\\
+2 & 5 & $3/2$ & 1.4963 & 1.5035 & 1.456\\
+3 & 3 & $14/5$ & 2.5168 & 3.0181 & $>1.10$\\
+3 & 4 & $15/7$ & 2.0936 & 2.1872 & 1.367\\
+3 & 5 & $11/6$ & 1.8210 & 1.8451 & 1.464\\
+4 & 3 & $55/14$ & 3.4871 & 4.2785 & $>1.10$\\
+4 & 4 & $91/33$ & 2.6798 & 2.8290 & 1.367\\
+4 & 5 & $204/91$ & 2.2211 & 2.2618 & 1.464\\
+5 & 3 & $182/33$ & 4.8715 & 6.0326 & $>1.10$\\
+5 & 4 & $323/91$ & 3.4411 & 3.6501 & 1.367\\
+5 & 5 & $1771/646$ & 2.7129 & 2.7695 & 1.464\\
+6 & 3 & $7752/1001$ & 6.8263 & 8.4875 & $>1.10$\\
+6 & 4 & $8855/1938$ & 4.4248 & 4.7041 & 1.367\\
+6 & 5 & $3393/1012$ & 3.3157 & 3.3892 & 1.464\\
+\bottomrule
+\end{tabular}
+\caption{Exact limit inferior and superior of the log-concavity ratio at fixed $k\ge3$ (numerical evaluation of \eqref{eq:liminf}).}\label{tab:liminf}
+\end{table}
+
+\section{Explicit two-orbit failures in ranks three and four}\label{sec:explicit}
+
+This section proves Proposition~\ref{prop:explicit}, and shows how large the first failures are. The certificate uses only Theorem~\ref{thm:explicit}.
+
+\paragraph{An exact formula with explicit error.} By \eqref{eq:explicit} at $r=2,3$, the exact one-orbit formula, and $\Sing_{\ell,r}=C_\ell^r\prod_pL_{p,r}$ for $r=1,2,3$,
+\begin{equation}\label{eq:Rcert}
+R_{\ell,2}(n)=G_{L,2}\prod_pK_{p,2}(v_p(n))\cdot\frac{(1+\theta_2E_{\ell,2}(n))^2}{1+\theta_3E_{\ell,3}(n)},\qquad|\theta_2|,|\theta_3|\le1 .
+\end{equation}
+The constants $D_\ell$, $C_\ell$, $U_\ell$ in $E_{\ell,r}$ may be replaced by the upper bounds $e$, $e$, $6e^2$ of Section~\ref{sec:uniform}, which only enlarge $E$. For primes $p\nmid n$, \eqref{eq:K0} with $k=2$ gives $1\le K_{p,2}(0)=1+q(1-q)/(1-q^3)\le1+q_p(1)\le1+2/p^2$, so $\prod_{p>P,\ p\nmid n}K_{p,2}(0)\le\exp(2/P)$.
+
+\paragraph{The certificate.} For $n=n_3$, and for $n=n_4$ (whose exponents are listed in the accompanying file \texttt{results/extensions.json}), all prime factors are below $P=10^5$. We computed each factor $K_{p,2}(v_p(n))$ for $p<P$ exactly as a rational number, multiplied them in interval arithmetic with $60$ significant digits, multiplied by $\exp(2/P)$, and bounded the error factor in \eqref{eq:Rcert} from above using $(1+E_{\ell,2})^2/(1-E_{\ell,3})$. The resulting upper bounds are $R_{3,2}(n_3)<0.99252$, with $E_{3,2}(n_3)<10^{-46}$ and $E_{3,3}(n_3)<10^{-42}$, and $R_{4,2}(n_4)<0.99961$, with error terms below $10^{-828}$.
+This proves Proposition~\ref{prop:explicit}. The same computation at $n=65\,214\,507\,758\,400$, $\ell=2$, gives $R_{2,2}(n)<1$, in agreement with \cite{CHS2026}.
+
+\paragraph{How large are the first failures?} The integers $n_3$ and $n_4$ were found by a greedy search that adds, one prime at a time, the prime whose next power most decreases the leading ratio per unit of $\log n$. At rank two the same search stops at $\log_{10}n\approx14.5$, against the true first failure $6.5\times10^{13}$. This suggests that the first two-orbit failure in rank three lies between roughly $10^{50}$ and $n_3$, and in rank four between roughly $10^{800}$ and $n_4$, and that $\delta_{3,2}(1)$ and $\delta_{4,2}(1)$ are extraordinarily small. These are heuristic estimates; we prove only the upper bounds on the first failure given by $n_3$ and $n_4$.
+
+\section{Checks, scope and open problems}\label{sec:checks}
+
+This section lists the independent checks of the constants and formulas, the limits of the results, and the questions left open.
+
+\paragraph{Checks.} With $a=0$ and all $d_i=1$, Lemma~\ref{lem:simplex} reduces to $\binom{n-1}{k-1}=n^{k-1}/(k-1)!+O(n^{k-2})$; at $\ell=2$ the Euler product reduces to \eqref{eq:rank2}, which is Starr's leading term; $\alpha_{2,2}=30/7$ agrees with the rank-two literature. Table~\ref{tab:rows} lists the first values of $A(\ell,n,k)$, which agree with direct enumeration of commuting tuples. The accompanying scripts check: the coefficient formula against brute-force enumeration for $n\le5$, $\ell\le4$; the Dirichlet-convolution identities \eqref{eq:B}--\eqref{eq:b} exactly through $n=40$, $\ell\le6$; every rational constant in Sections~\ref{sec:interior}--\ref{sec:uniform}; Theorem~\ref{thm:asym} and the bound \eqref{eq:explicit} against exact values of $A(\ell,n,k)$ for $\ell=3,4$, $k\le4$, $n\le1000$ (relative error below $1.2\%$ at $n=1000$); the thresholds of the finite criterion; Table~\ref{tab:liminf}; and the certificates of Section~\ref{sec:explicit}. The finite criterion $64kE_{\ell,k+1}(n)\le1$ of Theorem~\ref{thm:explicit} first holds at about $\log_{10}n=9.5$ for $(\ell,k)=(2,3)$, $14.0$ for $(3,3)$, $18.3$ for $(3,4)$ and $17.3$ for $(4,3)$.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}clll@{}}
+\toprule
+$\ell$ & $n=3$ & $n=4$ & $n=5$\\
+\midrule
+2 & $(8,9,1)$ & $(42,59,18,1)$ & $(144,450,215,30,1)$\\
+3 & $(26,21,1)$ & $(210,251,42,1)$ & $(744,2870,995,70,1)$\\
+4 & $(80,45,1)$ & $(930,995,90,1)$ & $(3744,16650,4175,150,1)$\\
+\bottomrule
+\end{tabular}
+\caption{Values $A(\ell,n,k)$ for $k=1,\dots,n$.}\label{tab:rows}
+\end{table}
+
+\paragraph{Scope.} Theorems~\ref{thm:fail}--\ref{thm:liminf} concern the lower edge of the orbit-count distribution, where $k$ is fixed, and Theorem~\ref{thm:laws} describes the arithmetic fluctuations there. They are compatible with log-concavity at typical orbit counts \cite{Abdesselam2025b} and with the fixed-$n$, large-$\ell$ results \cite{Abdesselam2025a}. The fixed-parameter limits do not allow $n$ and $\ell$ to be interchanged; Section~\ref{sec:uniform} gives separate conditions under which both may vary.
+
+\paragraph{Open problems.}
+\begin{enumerate}
+\item \emph{The bulk regime in higher rank.} Corollary~\ref{cor:window} leaves a wide gap between $k\approx\log n/\log\log n$ and the typical regime $k\asymp n^{(\ell-1)/\ell}$. Saddle-point methods of the kind used by Starr \cite{Starr2026b} at rank two, or the large-deviation framework of Li and Starr \cite{LiStarr}, seem better suited to it than the present method.
+\item \emph{Monotonicity of local factors.} Prove that $v\mapsto K_{p,k}(v)$ is non-increasing for all $\ell\ge2$, $k\ge3$ and primes $p$. This would identify the extremal constants in Theorem~\ref{thm:liminf} as $\prod_pK_{p,k}(\infty)$ and $\alpha_{\ell,k}$.
+\item \emph{The first failures and the density.} Find the smallest $n$ with $R_{3,2}(n)<1$, and estimate $\delta_{\ell,2}(1)$ numerically; even at rank two only the bounds of \cite{CHS2026} are known.
+\item \emph{Singularity.} Decide whether the limiting laws of Theorem~\ref{thm:laws} are purely singular.
+\item \emph{Is \eqref{eq:conj} true at $k\ge3$ for all $n$?} The finite criterion first applies near $10^{14}$ at $(\ell,k)=(3,3)$; a sharper, relative form of Lemma~\ref{lem:simplex} would lower this threshold, perhaps to a range where direct computation could close the case.
+\end{enumerate}
+
+\appendix
+\section{An abstract form of the leading-order argument}\label{app:abstract}
+
+This appendix isolates the convergence mechanism behind the leading term, under a condition that needs neither multiplicativity nor submultiplicativity. It is a form of the classical periodic-approximation argument, and no priority is claimed for it.
+
+\begin{proposition}\label{prop:abstract}
+Let $a\ge0$ and $k\ge2$, and let $h:\mathbb N\to[0,\infty)$ satisfy
+\[
+M_k(h)=\sum_{d_1,\ldots,d_k\ge1}\frac{\prod_ih(d_i)}{\lcm(d_1,\ldots,d_k)}<\infty .
+\]
+Put $g(n)=\sum_{d\mid n}h(d)$, $b(n)=n^ag(n)$, and define $\Sing_{h,k}(n)$ by \eqref{eq:sing} with $h$ in place of $h_\ell$. Then
+\[
+b^{\Ac k}(n)=\gamma_{a,k}\,n^{k(a+1)-1}\bigl(\Sing_{h,k}(n)+o(1)\bigr),
+\]
+with $o(1)$ uniform in the divisibility of $n$. If $h(1)>0$ this is a relative asymptotic.
+\end{proposition}
+
+\begin{proof}
+Prime by prime, $\min_ie_i+\max_ie_i\le\sum_ie_i$, so $\gcd(d_i)/\prod_id_i\le1/\lcm(d_i)$ and $\Sing_{h,k}(n)\le M_k(h)$. For $Y\ge1$ let $g_Y(n)=\sum_{d\mid n,\,d\le Y}h(d)$ and $r_Y=g-g_Y$. Expanding $k$-th powers and counting multiples of the lcm gives
+\[
+\sum_{m\le X}g(m)^k\le X\,M_k(h),\qquad\sum_{m\le X}r_Y(m)^k\le X\,\varepsilon_Y,
+\]
+where $\varepsilon_Y$ is the part of the series $M_k(h)$ with every $d_i>Y$, so $\varepsilon_Y\to0$. Writing $b^{\Ac k}-(n^ag_Y)^{\Ac k}$ as a telescoping sum of $k$ terms, each with one factor $r_Y$, and applying H\"older's inequality over the compositions of $n$ (fixing one coordinate leaves at most $n^{k-2}$ choices, and each moment sum contributes at most a constant times $n$) gives
+\[
+0\le b^{\Ac k}(n)-(n^ag_Y)^{\Ac k}(n)\le k\,\varepsilon_Y^{1/k}M_k(h)^{(k-1)/k}\,n^{k(a+1)-1}.
+\]
+For fixed $Y$, expand the finitely many divisor sums and apply Lemma~\ref{lem:simplex}; the resulting truncated singular series converges to $\Sing_{h,k}(n)$ uniformly in $n$, because the omitted part, the tuples with \emph{some} $d_i>Y$, is bounded by the corresponding tail of $M_k(h)$, which tends to $0$. Let $n\to\infty$ with $Y$ fixed and then $Y\to\infty$.
+\end{proof}
+
+\section*{Statement on the use of AI}
+This manuscript was developed with the assistance of AI systems, which were used for drafting, proof checking and computation. Separate AI-assisted reviews audited the proofs and recomputed the constants. The paper has not been refereed by human specialists and has not been formalised in a proof assistant. The accompanying scripts check finite identities, constants, numerical tables and the certificates of Section~\ref{sec:explicit}; the general theorems rest on the proofs given here.
+
+\begin{thebibliography}{99}\small
+
+\bibitem{Abdesselam2025a} A.~Abdesselam, Log-concavity with respect to the number of orbits for infinite tuples of commuting permutations, \emph{Annals of Combinatorics} 29 (2025), 563--573. \doi{10.1007/s00026-024-00724-z}; arXiv:2309.07358.
+
+\bibitem{Abdesselam2025b} A.~Abdesselam, Proof of a conjecture by Starr and log-concavity for random commuting permutations, arXiv:2506.06894 (2025).
+
+\bibitem{ABDV} A.~Abdesselam, P.~Brunialti, T.~Doan and P.~Velie, A bijection for tuples of commuting permutations and a log-concavity conjecture, \emph{Research in Number Theory} 10 (2024), Article 45. \doi{10.1007/s40993-024-00531-8}; arXiv:2309.09407.
+
+\bibitem{AbdesselamStarr} A.~Abdesselam and S.~Starr, A central limit theorem for a generalization of the Ewens measure to random tuples of commuting permutations, \emph{Journal of Theoretical Probability} 39 (2026), Article 32. \doi{10.1007/s10959-026-01489-2}; arXiv:2505.11469.
+
+\bibitem{BFH} K.~Bringmann, J.~Franke and B.~Heim, Asymptotics of commuting $\ell$-tuples in symmetric groups and log-concavity, \emph{Research in Number Theory} 10 (2024), Article 83. \doi{10.1007/s40993-024-00562-1}; arXiv:2401.05874.
+
+\bibitem{BryanFulman} J.~Bryan and J.~Fulman, Orbifold Euler characteristics and the number of commuting $m$-tuples in the symmetric groups, \emph{Annals of Combinatorics} 2 (1998), 1--6. \doi{10.1007/BF01626025}; arXiv:math/9712248.
+
+\bibitem{CHS2026} S.~Charlton, B.~Heim and J.~Stumpenhusen, On the smallest counterexample to the log-concavity of the D'Arcais polynomials, arXiv:2606.09545v2 (2026).
+
+\bibitem{CHNST2026} S.~Charlton, B.~Heim, M.~Neuhauser, J.~Stumpenhusen and R.~Tr\"oger, A positive proportion of the reduced D'Arcais polynomials is not Hurwitz, arXiv:2608.18842v2 (2026).
+
+\bibitem{ErdosWintner} P.~Erd\H{o}s and A.~Wintner, Additive arithmetical functions and statistical independence, \emph{American Journal of Mathematics} 61 (1939), 713--721. \doi{10.2307/2371326}.
+
+\bibitem{GMP} H.~Gopalakrishna Gadiyar, M.~Ram Murty and R.~Padma, Ramanujan--Fourier series and a theorem of Ingham, \emph{Indian Journal of Pure and Applied Mathematics} 45 (2014), 691--706. \doi{10.1007/s13226-014-0084-5}.
+
+\bibitem{HeimNeuhauser} B.~Heim and M.~Neuhauser, Horizontal and vertical log-concavity, \emph{Research in Number Theory} 7 (2021), Article 18. \doi{10.1007/s40993-021-00245-1}; arXiv:2010.05231.
+
+\bibitem{LOST} R.~J.~Lemke Oliver, S.~T.~Shrestha and F.~Thorne, Asymptotic identities for additive convolutions of sums of divisors, \emph{Mathematical Proceedings of the Cambridge Philosophical Society} 174 (2023), 59--78. \doi{10.1017/S0305004122000135}; arXiv:2007.09275.
+
+\bibitem{LiStarr} S.~Li and S.~Starr, About the Cram\'er large deviation property for Bell polynomials, arXiv:2609.06281 (2026).
+
+\bibitem{MSS} B.~Misra, B.~Saha and A.~Sharma, On additive convolution sum of arithmetic functions and related questions, arXiv:2502.08305v2 (2026).
+
+\bibitem{Starr2026a} S.~Starr, Asymptotics of the d'Arcais numbers at small $k$, arXiv:2601.18599v4 (2026).
+
+\bibitem{Starr2026b} S.~Starr, Large deviations for the d'Arcais numbers, arXiv:2601.07103v2 (2026).
+
+\bibitem{Stumpenhusen} J.~Stumpenhusen, On the log-concavity of the D'Arcais polynomials for normalised functions, arXiv:2607.14961 (2026).
+
+\bibitem{TenenbaumVerwee} G.~Tenenbaum and J.~Verwee, Effective Erd\H{o}s--Wintner theorems, \emph{Proceedings of the Steklov Institute of Mathematics} 314 (2021), 264--278. \doi{10.1134/S008154382104012X}; arXiv:2002.07475.
+
+\bibitem{Tripathi} R.~Tripathi, On log-concavity of the number of orbits in commuting tuples of permutations, \emph{Research in Number Theory} 10 (2024), Article 78. \doi{10.1007/s40993-024-00571-0}; arXiv:2408.17212.
+
+\end{thebibliography}
+\end{document}

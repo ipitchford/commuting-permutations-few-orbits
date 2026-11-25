@@ -1,0 +1,323 @@
+{
+ "schemaVersion": "1.0",
+ "provenance": "Compiled 25 November 2026 for 0.1.0-candidate from the dated searches of the internal AI-assisted review (24 November 2026), the source retrieval and reading record (24-25 November 2026), the corpus overlap check, refs.bib, REVIEW_SUMMARY.md and the paper's own positioning (Sections 1 and 12). It records scrutiny performed, not historical priority.",
+ "contributionMap": [
+  {
+   "claim": "For every fixed rank l >= 2, Abdesselam's log-concavity conjecture fails at k = 2 (R_{l,2}(m!) -> 0; failures on all large multiples of some Q), and at every fixed k >= 3 it holds for large n",
+   "unit": "statement",
+   "paperLocation": "abstract; Theorems 2.3 and 2.4",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "arXiv API abstract search; Semantic Scholar citations of Starr arXiv:2601.18599 (6 citing papers); one web search; the Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "d'Arcais; commuting permutations; commuting tuples; Nekrasov-Okounkov polynomials; joint orbits; additive convolution divisor; authors Starr, Stumpenhusen, Heim, Abdesselam, Charlton, Tripathi"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read: Starr (arXiv:2601.18599v4, 2601.07103v2), Charlton-Heim-Stumpenhusen (2606.09545v2), Charlton et al. (2608.18842v2), Stumpenhusen (2607.14961), Abdesselam (2506.06894, 2309.07358), Abdesselam-Brunialti-Doan-Velie (2309.09407), Tripathi (2408.17212), Abdesselam-Starr (2505.11469), Lemke Oliver-Shrestha-Thorne (2007.09275), Misra-Saha-Sharma (2502.08305v2), Tenenbaum-Verwee (2002.07475), Bringmann-Franke-Heim (2401.05874), Bryan-Fulman (math/9712248), Heim-Neuhauser (2010.05231), Erdos-Wintner 1939; Gadiyar-Murty-Padma 2014 read 25 November 2026",
+     "query": "Starr Corollary 2.4, Appendix B and Section 5; CHS Theorems 1.3-1.4; CHNST Section 2.1; LOST main theorem; GMP Theorems 10 and 13; Erdos-Wintner theorem; Abdesselam Conjecture 1.1"
+    }
+   ],
+   "closestPriorWork": "Starr arXiv:2601.18599 (the rank-two case, which he names the most important open problem for l >= 3)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "no statement or disproof for l >= 3 found; rank two credited to Starr"
+  },
+  {
+   "claim": "Exact limit inferior and superior of R_{l,k}(n) at fixed k >= 3 as Euler products; reduces to Starr Corollary 2.4 at rank two (times (k+1)/k)",
+   "unit": "statement",
+   "paperLocation": "Theorem 2.5; Table 2",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "arXiv API abstract search; Semantic Scholar citations of Starr arXiv:2601.18599 (6 citing papers); one web search; the Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "d'Arcais; commuting permutations; commuting tuples; Nekrasov-Okounkov polynomials; joint orbits; additive convolution divisor; authors Starr, Stumpenhusen, Heim, Abdesselam, Charlton, Tripathi"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read: Starr (arXiv:2601.18599v4, 2601.07103v2), Charlton-Heim-Stumpenhusen (2606.09545v2), Charlton et al. (2608.18842v2), Stumpenhusen (2607.14961), Abdesselam (2506.06894, 2309.07358), Abdesselam-Brunialti-Doan-Velie (2309.09407), Tripathi (2408.17212), Abdesselam-Starr (2505.11469), Lemke Oliver-Shrestha-Thorne (2007.09275), Misra-Saha-Sharma (2502.08305v2), Tenenbaum-Verwee (2002.07475), Bringmann-Franke-Heim (2401.05874), Bryan-Fulman (math/9712248), Heim-Neuhauser (2010.05231), Erdos-Wintner 1939; Gadiyar-Murty-Padma 2014 read 25 November 2026",
+     "query": "Starr Corollary 2.4, Appendix B and Section 5; CHS Theorems 1.3-1.4; CHNST Section 2.1; LOST main theorem; GMP Theorems 10 and 13; Erdos-Wintner theorem; Abdesselam Conjecture 1.1"
+    }
+   ],
+   "closestPriorWork": "Starr Corollary 2.4 (rank two)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "higher-rank constants not found"
+  },
+  {
+   "claim": "Continuous limiting distribution of R_{l,k}(n); the density of two-orbit failures exists and lies in (0,1) in every rank, including rank two",
+   "unit": "statement",
+   "paperLocation": "Theorem 2.8",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "arXiv API abstract search; Semantic Scholar citations of Starr arXiv:2601.18599 (6 citing papers); one web search; the Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "d'Arcais; commuting permutations; commuting tuples; Nekrasov-Okounkov polynomials; joint orbits; additive convolution divisor; authors Starr, Stumpenhusen, Heim, Abdesselam, Charlton, Tripathi"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read: Starr (arXiv:2601.18599v4, 2601.07103v2), Charlton-Heim-Stumpenhusen (2606.09545v2), Charlton et al. (2608.18842v2), Stumpenhusen (2607.14961), Abdesselam (2506.06894, 2309.07358), Abdesselam-Brunialti-Doan-Velie (2309.09407), Tripathi (2408.17212), Abdesselam-Starr (2505.11469), Lemke Oliver-Shrestha-Thorne (2007.09275), Misra-Saha-Sharma (2502.08305v2), Tenenbaum-Verwee (2002.07475), Bringmann-Franke-Heim (2401.05874), Bryan-Fulman (math/9712248), Heim-Neuhauser (2010.05231), Erdos-Wintner 1939; Gadiyar-Murty-Padma 2014 read 25 November 2026",
+     "query": "Starr Corollary 2.4, Appendix B and Section 5; CHS Theorems 1.3-1.4; CHNST Section 2.1; LOST main theorem; GMP Theorems 10 and 13; Erdos-Wintner theorem; Abdesselam Conjecture 1.1"
+    }
+   ],
+   "closestPriorWork": "Charlton-Heim-Stumpenhusen arXiv:2606.09545 (density bounds stated if the density exists)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "existence of the density not found; the proof applies the classical Erdos-Wintner theorem"
+  },
+  {
+   "claim": "Certified explicit failures R_{3,2}(n_3) < 0.9926 (54 digits) and R_{4,2}(n_4) < 0.99961 (845 digits)",
+   "unit": "object",
+   "paperLocation": "Proposition 2.9; Section 11",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "arXiv API abstract search; Semantic Scholar citations of Starr arXiv:2601.18599 (6 citing papers); one web search; the Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "d'Arcais; commuting permutations; commuting tuples; Nekrasov-Okounkov polynomials; joint orbits; additive convolution divisor; authors Starr, Stumpenhusen, Heim, Abdesselam, Charlton, Tripathi"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read: Starr (arXiv:2601.18599v4, 2601.07103v2), Charlton-Heim-Stumpenhusen (2606.09545v2), Charlton et al. (2608.18842v2), Stumpenhusen (2607.14961), Abdesselam (2506.06894, 2309.07358), Abdesselam-Brunialti-Doan-Velie (2309.09407), Tripathi (2408.17212), Abdesselam-Starr (2505.11469), Lemke Oliver-Shrestha-Thorne (2007.09275), Misra-Saha-Sharma (2502.08305v2), Tenenbaum-Verwee (2002.07475), Bringmann-Franke-Heim (2401.05874), Bryan-Fulman (math/9712248), Heim-Neuhauser (2010.05231), Erdos-Wintner 1939; Gadiyar-Murty-Padma 2014 read 25 November 2026",
+     "query": "Starr Corollary 2.4, Appendix B and Section 5; CHS Theorems 1.3-1.4; CHNST Section 2.1; LOST main theorem; GMP Theorems 10 and 13; Erdos-Wintner theorem; Abdesselam Conjecture 1.1"
+    }
+   ],
+   "closestPriorWork": "CHS first rank-two counterexample 65 214 507 758 400",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "no higher-rank counterexample found"
+  },
+  {
+   "claim": "Asymptotic formula for A(l,n,k) with explicit singular series and an explicit error uniform in the factorisation of n; finite criterion; growing window c < 1/l",
+   "unit": "statement",
+   "paperLocation": "Theorems 2.2 and 2.6; Corollary 2.7",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "arXiv API abstract search; Semantic Scholar citations of Starr arXiv:2601.18599 (6 citing papers); one web search; the Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "d'Arcais; commuting permutations; commuting tuples; Nekrasov-Okounkov polynomials; joint orbits; additive convolution divisor; authors Starr, Stumpenhusen, Heim, Abdesselam, Charlton, Tripathi"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read: Starr (arXiv:2601.18599v4, 2601.07103v2), Charlton-Heim-Stumpenhusen (2606.09545v2), Charlton et al. (2608.18842v2), Stumpenhusen (2607.14961), Abdesselam (2506.06894, 2309.07358), Abdesselam-Brunialti-Doan-Velie (2309.09407), Tripathi (2408.17212), Abdesselam-Starr (2505.11469), Lemke Oliver-Shrestha-Thorne (2007.09275), Misra-Saha-Sharma (2502.08305v2), Tenenbaum-Verwee (2002.07475), Bringmann-Franke-Heim (2401.05874), Bryan-Fulman (math/9712248), Heim-Neuhauser (2010.05231), Erdos-Wintner 1939; Gadiyar-Murty-Padma 2014 read 25 November 2026",
+     "query": "Starr Corollary 2.4, Appendix B and Section 5; CHS Theorems 1.3-1.4; CHNST Section 2.1; LOST main theorem; GMP Theorems 10 and 13; Erdos-Wintner theorem; Abdesselam Conjecture 1.1"
+    }
+   ],
+   "closestPriorWork": "Lemke Oliver-Shrestha-Thorne (additive convolutions of divisor sums); Starr (rank two)",
+   "verdict": "partially-known-cited",
+   "verdictNote": "qualitative leading term follows the Ingham-Halberstam route, as the paper states; explicit uniform error constants not found"
+  },
+  {
+   "claim": "Methods: weighted lattice-point count with divisibility conditions and absolute constants; Euler-factor inequalities; Erdos-Wintner applied to the log-concavity ratio; interval-arithmetic certificate built on the explicit error",
+   "unit": "method",
+   "paperLocation": "Lemmas 3.1-3.2, Sections 4-11",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "arXiv API abstract search; Semantic Scholar citations of Starr arXiv:2601.18599 (6 citing papers); one web search; the Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "d'Arcais; commuting permutations; commuting tuples; Nekrasov-Okounkov polynomials; joint orbits; additive convolution divisor; authors Starr, Stumpenhusen, Heim, Abdesselam, Charlton, Tripathi"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read: Starr (arXiv:2601.18599v4, 2601.07103v2), Charlton-Heim-Stumpenhusen (2606.09545v2), Charlton et al. (2608.18842v2), Stumpenhusen (2607.14961), Abdesselam (2506.06894, 2309.07358), Abdesselam-Brunialti-Doan-Velie (2309.09407), Tripathi (2408.17212), Abdesselam-Starr (2505.11469), Lemke Oliver-Shrestha-Thorne (2007.09275), Misra-Saha-Sharma (2502.08305v2), Tenenbaum-Verwee (2002.07475), Bringmann-Franke-Heim (2401.05874), Bryan-Fulman (math/9712248), Heim-Neuhauser (2010.05231), Erdos-Wintner 1939; Gadiyar-Murty-Padma 2014 read 25 November 2026",
+     "query": "Starr Corollary 2.4, Appendix B and Section 5; CHS Theorems 1.3-1.4; CHNST Section 2.1; LOST main theorem; GMP Theorems 10 and 13; Erdos-Wintner theorem; Abdesselam Conjecture 1.1"
+    }
+   ],
+   "closestPriorWork": "Ingham-Halberstam method via LOST and Starr; Ramanujan expansions (Gadiyar-Murty-Padma Theorem 10; Misra-Saha-Sharma); Erdos-Wintner 1939 and Tenenbaum-Verwee",
+   "verdict": "partially-known-cited",
+   "verdictNote": "standard tools credited in Section 1.5; no new probabilistic input claimed"
+  },
+  {
+   "claim": "Positive lower density of n for which the reduced polynomial P_{l,n}(X)/X has a root in the right half-plane, every rank",
+   "unit": "statement",
+   "paperLocation": "Section 9.4",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "arXiv API abstract search; Semantic Scholar citations of Starr arXiv:2601.18599 (6 citing papers); one web search; the Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "d'Arcais; commuting permutations; commuting tuples; Nekrasov-Okounkov polynomials; joint orbits; additive convolution divisor; authors Starr, Stumpenhusen, Heim, Abdesselam, Charlton, Tripathi"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read: Starr (arXiv:2601.18599v4, 2601.07103v2), Charlton-Heim-Stumpenhusen (2606.09545v2), Charlton et al. (2608.18842v2), Stumpenhusen (2607.14961), Abdesselam (2506.06894, 2309.07358), Abdesselam-Brunialti-Doan-Velie (2309.09407), Tripathi (2408.17212), Abdesselam-Starr (2505.11469), Lemke Oliver-Shrestha-Thorne (2007.09275), Misra-Saha-Sharma (2502.08305v2), Tenenbaum-Verwee (2002.07475), Bringmann-Franke-Heim (2401.05874), Bryan-Fulman (math/9712248), Heim-Neuhauser (2010.05231), Erdos-Wintner 1939; Gadiyar-Murty-Padma 2014 read 25 November 2026",
+     "query": "Starr Corollary 2.4, Appendix B and Section 5; CHS Theorems 1.3-1.4; CHNST Section 2.1; LOST main theorem; GMP Theorems 10 and 13; Erdos-Wintner theorem; Abdesselam Conjecture 1.1"
+    }
+   ],
+   "closestPriorWork": "Charlton et al. arXiv:2608.18842 (rank two)",
+   "verdict": "partially-known-cited",
+   "verdictNote": "rank two credited; extension by the same mechanism"
+  }
+ ],
+ "sourcesReadInFull": [
+  {
+   "citation": "Starr, S. (2026), Asymptotics of the d'Arcais numbers at small k, arXiv:2601.18599v4",
+   "usedFor": "rank-two theorem, formula and the open problem",
+   "readWhat": "whole paper",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://arxiv.org/abs/2601.18599v4"
+  },
+  {
+   "citation": "Charlton, S., Heim, B. and Stumpenhusen, J. (2026), On the smallest counterexample to the log-concavity of the D'Arcais polynomials, arXiv:2606.09545v2",
+   "usedFor": "first counterexample and density bounds",
+   "readWhat": "whole paper (Theorems 1.3-1.4)",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://arxiv.org/abs/2606.09545v2"
+  },
+  {
+   "citation": "Abdesselam, A. (2025), Log-concavity with respect to the number of orbits for infinite tuples of commuting permutations, Ann. Comb. 29, 563-573",
+   "usedFor": "the conjecture (Conjecture 1.1)",
+   "readWhat": "whole paper (arXiv:2309.07358)",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.1007/s00026-024-00724-z"
+  },
+  {
+   "citation": "Lemke Oliver, R. J., Shrestha, S. T. and Thorne, F. (2023), Asymptotic identities for additive convolutions of sums of divisors, Math. Proc. Cambridge Philos. Soc. 174, 59-78",
+   "usedFor": "classical route to the leading term",
+   "readWhat": "whole paper (arXiv:2007.09275)",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.1017/S0305004122000135"
+  },
+  {
+   "citation": "Gopalakrishna Gadiyar, H., Ram Murty, M. and Padma, R. (2014), Ramanujan-Fourier series and a theorem of Ingham, Indian J. Pure Appl. Math. 45, 691-706",
+   "usedFor": "Theorem 10 (additive convolution via Ramanujan expansions); Theorem 13",
+   "readWhat": "pp. 700-704, read page by page",
+   "date": "2026-11-25",
+   "evidenceLocator": "https://doi.org/10.1007/s13226-014-0084-5"
+  },
+  {
+   "citation": "Erdos, P. and Wintner, A. (1939), Additive arithmetical functions and statistical independence, Amer. J. Math. 61, 713-721",
+   "usedFor": "the distribution theorem applied in Section 9",
+   "readWhat": "whole paper",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.2307/2371326"
+  },
+  {
+   "citation": "Tenenbaum, G. and Verwee, J. (2021), Effective Erdos-Wintner theorems, Proc. Steklov Inst. Math. 314, 264-278",
+   "usedFor": "statement of the theorem; Jessen-Wintner purity",
+   "readWhat": "whole paper (arXiv:2002.07475)",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.1134/S008154382104012X"
+  },
+  {
+   "citation": "Charlton, S., Heim, B., Neuhauser, M., Stumpenhusen, J. and Troger, R. (2026), A positive proportion of the reduced D'Arcais polynomials is not Hurwitz, arXiv:2608.18842v2",
+   "usedFor": "Hurwitz criterion (Section 2.1)",
+   "readWhat": "whole paper",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://arxiv.org/abs/2608.18842v2"
+  },
+  {
+   "citation": "Bryan, J. and Fulman, J. (1998), Orbifold Euler characteristics and the number of commuting m-tuples in the symmetric groups, Ann. Comb. 2, 1-6",
+   "usedFor": "exponential formula",
+   "readWhat": "whole paper (arXiv:math/9712248)",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.1007/BF01626025"
+  }
+ ],
+ "limitationTriage": [
+  {
+   "limitation": "Only fixed numbers of orbits; the range between about log n / log log n and typical orbit counts is not covered",
+   "closingQuestion": "Does a known result close the bulk regime in higher rank?",
+   "triedOrSearched": "literature checked (Abdesselam typical k; Starr rank-two large deviations; Li-Starr); not attempted",
+   "estimatedCost": "weeks",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 12, open problem 1",
+   "whyNotClosedNow": "needs saddle-point or large-deviation methods"
+  },
+  {
+   "limitation": "Monotonicity in v of the local factors K_{p,k}(v) observed numerically, not proved",
+   "closingQuestion": "Is there a short proof of monotonicity?",
+   "triedOrSearched": "checked numerically in every computed case; Starr proves the rank-two case",
+   "estimatedCost": "days",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 12, open problem 2",
+   "whyNotClosedNow": "the exact values in Theorem 2.5 do not depend on it"
+  },
+  {
+   "limitation": "Explicit failures are not the smallest; the density at rank >= 3 is unknown numerically",
+   "closingQuestion": "Can the first rank-three failure be found cheaply?",
+   "triedOrSearched": "greedy heuristic search; rank-two calibration against the known first failure",
+   "estimatedCost": "weeks of search",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 12, open problem 3",
+   "whyNotClosedNow": "search space far beyond a cheap computation"
+  },
+  {
+   "limitation": "Whether the limit laws are singular is undecided",
+   "closingQuestion": "Does a known purity criterion decide it?",
+   "triedOrSearched": "Jessen-Wintner purity recalled; not decided",
+   "estimatedCost": "unknown",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 12, open problem 4",
+   "whyNotClosedNow": "no cheap criterion found"
+  },
+  {
+   "limitation": "The finite criterion first applies near 10^14 at (3,3)",
+   "closingQuestion": "Could the conjecture at k = 3 be closed by computation?",
+   "triedOrSearched": "thresholds computed by verify.py",
+   "estimatedCost": "weeks",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 12, open problem 5",
+   "whyNotClosedNow": "needs a sharper relative lattice estimate"
+  },
+  {
+   "limitation": "The uniform k = 3 bound 1.10 was far from the truth in the first draft",
+   "closingQuestion": "Is the exact limit inferior computable?",
+   "triedOrSearched": "yes: Theorem 2.5 and Table 2 added in the revision",
+   "estimatedCost": "hours",
+   "cheap": true,
+   "decision": "CLOSED",
+   "reasonOpen": "",
+   "whyNotClosedNow": ""
+  },
+  {
+   "limitation": "No explicit higher-rank counterexample in the first draft",
+   "closingQuestion": "Can one be certified?",
+   "triedOrSearched": "yes: Proposition 2.9 with interval certificates and an independent exact recheck",
+   "estimatedCost": "hours",
+   "cheap": true,
+   "decision": "CLOSED",
+   "reasonOpen": "",
+   "whyNotClosedNow": ""
+  },
+  {
+   "limitation": "Certificate scripts relied on assert in the source bundle",
+   "closingQuestion": "Do the checks fail correctly under python -O?",
+   "triedOrSearched": "new scripts with explicit check() calls; two negative controls exit 1 under -O",
+   "estimatedCost": "hours",
+   "cheap": true,
+   "decision": "CLOSED",
+   "reasonOpen": "",
+   "whyNotClosedNow": ""
+  },
+  {
+   "limitation": "Novelty rests on searches of limited scope",
+   "closingQuestion": "Would further indexes change attribution?",
+   "triedOrSearched": "arXiv, Semantic Scholar citations, web search; cited sources read",
+   "estimatedCost": "subscription indexes",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "subscription indexes were outside the searched corpus",
+   "whyNotClosedNow": "recorded here; the paper positions its results against the sources read"
+  }
+ ],
+ "extensionScout": {
+  "by": "the internal review panel, the re-reviewer and the lead",
+  "date": "2026-11-24",
+  "proposals": [
+   "exact limit inferior for l >= 3",
+   "explicit higher-rank counterexamples",
+   "thresholds of the finite criterion",
+   "bulk regime for l >= 3",
+   "first rank-three counterexample",
+   "singularity of the limit law"
+  ],
+  "actions": [
+   "done: Theorem 2.5 and Table 2",
+   "done: Proposition 2.9",
+   "done: stated after Theorem 2.6 and in Section 12",
+   "not done: open problem 1",
+   "not done: open problem 3",
+   "not done: open problem 4"
+  ]
+ }
+}

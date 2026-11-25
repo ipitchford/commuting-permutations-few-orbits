@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: MIT
+name: Replay
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+jobs:
+  replay:
+    name: Manifest; both scripts under python -O; comparison under the declared policy; negative controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check MANIFEST.sha256
+        run: sha256sum -c MANIFEST.sha256
+      - name: Install pinned packages
+        run: python3 -m pip install -r requirements.txt
+      - name: Run both scripts and the negative controls in copies of the package (cwd = package root)
+        run: |
+          python3 -I -c 'import sys, mpmath; print(sys.version, mpmath.__version__)'
+          for d in runO neg1 neg2; do mkdir -p "$RUNNER_TEMP/$d/results"; cp -R code requirements.txt "$RUNNER_TEMP/$d/"; done
+          cd "$RUNNER_TEMP/neg1"
+          sed -i '284s/F(2401, 1800)/F(2400, 1800)/' code/verify.py
+          grep -q 'G23 \* P3 \*\* 2 / (Q2 \* Q4) == F(2400, 1800)' code/verify.py
+          cd "$RUNNER_TEMP/neg2"
+          sed -i "s/'certified_R_below_one': bool(hi(R_upper) < 1)/'certified_R_below_one': bool(hi(R_upper) < 0.99)/" code/extensions.py
+          grep -q 'bool(hi(R_upper) < 0.99)' code/extensions.py
+          cd "$RUNNER_TEMP/runO"
+          python3 -I -B -O code/verify.py --output results/verification.json > verify.out & p1=$!
+          python3 -I -B -O code/extensions.py --output results/extensions.json > ext.out & p2=$!
+          cd "$RUNNER_TEMP/neg1"; python3 -I -B -O code/verify.py --output results/verification.json > out.txt 2>&1 & p3=$!
+          cd "$RUNNER_TEMP/neg2"; python3 -I -B -O code/extensions.py --output results/extensions.json > out.txt 2>&1 & p4=$!
+          wait $p1
+          wait $p2
+          tail -1 "$RUNNER_TEMP/runO/verify.out" "$RUNNER_TEMP/runO/ext.out"
+          if wait $p3; then echo "altered constant 2401/1800 not detected"; exit 1; fi
+          grep -q 'FAIL: (2.9) k=3 prefactor' "$RUNNER_TEMP/neg1/out.txt"
+          if wait $p4; then echo "tightened certificate threshold not detected"; exit 1; fi
+          grep -q 'FAIL: certified R_{3,2}(n) < 1' "$RUNNER_TEMP/neg2/out.txt"
+          echo "negative controls detected"
+      - name: Compare with the recorded outputs
+        # Declared policy (also in README.md, ENVIRONMENT.txt and REPLAY_RECEIPT.md): elapsed_seconds ignored; integers,
+        # booleans, rationals and text identical; mpmath decimals agree to 10 significant digits.
+        run: |
+          python3 -I .github/ci/compare_json.py "$RUNNER_TEMP/runO/results/verification.json" results/verification.json
+          python3 -I .github/ci/compare_json.py "$RUNNER_TEMP/runO/results/extensions.json" results/extensions.json
+      - name: Working tree unchanged
+        run: test -z "$(git status --porcelain)"

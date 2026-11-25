@@ -1,0 +1,135 @@
+{
+ "title": "Commuting permutations with few joint orbits: asymptotics, log-concavity and the density of failures in every rank",
+ "upload_type": "publication",
+ "publication_type": "preprint",
+ "description": "<p><strong>Unrefereed research candidate.</strong> Take &ell; permutations of an n-element set that all commute with one another. Together they split the set into joint orbits that the permutations never mix. A(&ell;,n,k) counts the ordered &ell;-tuples of commuting permutations with exactly k joint orbits. For &ell; = 1 these are the Stirling numbers of the first kind, which are log-concave in k (each term squared is at least the product of its neighbours). For &ell; = 2 they are, after normalisation, the coefficients of the d'Arcais polynomials; in general they count coverings of the &ell;-dimensional torus. Abdesselam conjectured that k &rarr; A(&ell;,n,k) is log-concave for every &ell; and n. Starr (2026) showed at rank two that this fails at k = 2 for infinitely many n but holds at every fixed k &ge; 3 for large n, and called the higher-rank case the most important open problem; Charlton, Heim and Stumpenhusen (2026) found the first rank-two counterexample, n = 65&thinsp;214&thinsp;507&thinsp;758&thinsp;400, with bounds on the density of failures.</p><p><strong>Results</strong> (every fixed rank &ell; &ge; 2, fixed k). (1) An asymptotic formula for A(&ell;,n,k) with an Euler-product arithmetic factor and an explicit error term, uniform in the prime factorisation of n. (2) The conjecture fails at k = 2 in every rank: the log-concavity ratio tends to 0 along n = m! and is below any &epsilon; &gt; 0 on a set of positive density. (3) At every fixed k &ge; 3 it holds for all large n; the exact limit inferior and limit superior of the ratio are Euler products (for example about 2.52 at &ell; = 3, k = 3, where the elementary bound gives 1.10), and at rank two they reproduce Starr's formula. (4) For every fixed &ell; and k the ratio has a continuous limiting distribution, so the density of two-orbit failures exists and lies strictly between 0 and 1 in every rank; this is new also at rank two. (5) Certified explicit failures: an integer with 54 digits (about 1.45&times;10<sup>53</sup>) in rank three and one with 845 digits in rank four. (6) A strict log-concavity window 3 &le; k &le; c log n / log log n for c &lt; 1/&ell;.</p><p><strong>Mechanism.</strong> A single orbit means the tuple acts transitively; that count carries the factor &sigma;(n)/n, which is large when n has many small prime factors. Counts with two or more orbits carry only bounded arithmetic factors. The two-orbit ratio has the one-orbit count in its denominator, so it collapses exactly when &sigma;(n)/n is large.</p><p><strong>Limits.</strong> Fixed numbers of orbits only; the range between about log n / log log n and the typical orbit counts treated by Abdesselam is open. The qualitative leading asymptotic for &ell; &ge; 3 follows the classical Ingham&ndash;Halberstam method (as Starr noted at rank two); the density result applies the classical Erd&#337;s&ndash;Wintner theorem. The explicit failures are not claimed to be the smallest; failures in ranks three and four are astronomically rare. The table of limit values is a numerical evaluation; the certificates are rigorous interval computations.</p><p><strong>Contents.</strong> The paper (LaTeX source and PDF) and two Python scripts with their recorded outputs: verify.py (brute-force enumeration against the coefficient formula, exact identities, exact-versus-asymptotic comparison up to n = 1000, every rational constant, finite-criterion thresholds) and extensions.py (the table of limit inferior and superior values and the interval certificates of the explicit failures). Each script exits with an error on any failed check, also under python -O. Also included: the bibliography, a machine-readable index, a research-gate record, a review summary, a replay receipt and SHA-256 sums.</p><p><strong>Assurance.</strong> Written proofs with computer checks. Internal AI-assisted review only: a five-reviewer Claude review panel, one revision round with two extensions, a re-review, a proof audit of every new or rewritten proof with an independent exact recheck of the rank-three certificate, and clean replays with negative controls. No Astra/Codex review took place. This is not peer review, independent reproduction or formal verification. Creator: Anonymous. Text CC0-1.0; code MIT.</p>",
+ "creators": [
+  {
+   "name": "Anonymous"
+  }
+ ],
+ "access_right": "open",
+ "license": "cc-zero",
+ "version": "0.1.0-candidate",
+ "publication_date": "2026-11-25",
+ "keywords": [
+  "commuting permutations",
+  "joint orbits",
+  "d'Arcais polynomials",
+  "log-concavity",
+  "additive convolution",
+  "divisor sums",
+  "singular series",
+  "Erdős–Wintner theorem",
+  "torus coverings",
+  "Stirling numbers"
+ ],
+ "notes": "Code (*.py and the CI workflow) is MIT; prose, manuscript, recorded outputs and records are CC0-1.0.",
+ "related_identifiers": [
+  {
+   "identifier": "https://github.com/ipitchford/commuting-permutations-few-orbits/tree/v0.1.0-candidate",
+   "relation": "isSupplementTo",
+   "scheme": "url"
+  },
+  {
+   "identifier": "https://evidencepress.org/releases/commuting-permutations-few-orbits/",
+   "relation": "isDocumentedBy",
+   "scheme": "url"
+  },
+  {
+   "identifier": "10.1007/s00026-024-00724-z",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1007/s40993-024-00531-8",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1007/s10959-026-01489-2",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1007/s40993-024-00562-1",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1007/bf01626025",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.2307/2371326",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1007/s13226-014-0084-5",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1007/s40993-021-00245-1",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1017/s0305004122000135",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1134/s008154382104012x",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1007/s40993-024-00571-0",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "arXiv:2506.06894",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2606.09545",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2608.18842",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2609.06281",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2502.08305",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2601.18599",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2601.07103",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2607.14961",
+   "relation": "references",
+   "scheme": "arxiv"
+  }
+ ]
+}

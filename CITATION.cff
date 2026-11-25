@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using these metadata."
+type: software
+title: "Commuting permutations with few joint orbits: asymptotics, log-concavity and the density of failures in every rank"
+abstract: "Unrefereed research candidate. A(l,n,k) counts the ordered l-tuples of pairwise commuting permutations of an n-element set with exactly k joint orbits. Abdesselam conjectured that k -> A(l,n,k) is log-concave for every rank l and every n; Starr disproved this at rank two at k = 2 and asked about higher rank. For every fixed rank l >= 2 and fixed k: the conjecture fails at two orbits in every rank, on a set of n of positive density, and holds at every fixed k >= 3 for large n; the exact limit inferior and superior of the log-concavity ratio are Euler products; the ratios have continuous limiting distributions, so the density of two-orbit failures exists (new also at rank two); explicit failures are certified in ranks three (a 54-digit n) and four (an 845-digit n). The proofs rest on an asymptotic formula with an explicit arithmetic factor and an explicit, uniform error term."
+authors:
+  - name: "Anonymous"
+version: "0.1.0-candidate"
+date-released: "2026-11-25"
+doi: "10.5281/zenodo.24541319"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24541319"
+    description: "This version"
+  - type: doi
+    value: "10.5281/zenodo.24541318"
+    description: "All versions (concept DOI)"
+repository-code: "https://github.com/ipitchford/commuting-permutations-few-orbits"
+url: "https://evidencepress.org/releases/commuting-permutations-few-orbits/"
+license: CC0-1.0
+keywords:
+  - commuting permutations
+  - joint orbits
+  - d'Arcais polynomials
+  - log-concavity
+  - singular series
+  - Erdős–Wintner theorem
+preferred-citation:
+  type: article
+  title: "Commuting permutations with few joint orbits: asymptotics, log-concavity and the density of failures in every rank"
+  authors:
+    - name: "Anonymous"
+  year: 2026
+  doi: "10.5281/zenodo.24541319"
+  publisher:
+    name: "Zenodo"
+  notes: "Version 0.1.0-candidate; unrefereed"
